@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asian Dancer - Player</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .player-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        video {
+            width: 100%;
+            max-height: 480px;
+            display: block;
+            border-radius: 8px;
+            background: #000;
+        }
+        .back-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            font-weight: bold;
+            display: inline-block;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="player-container">
+        <a href="https://video.asiandancer.club" class="back-btn">⬅ Quay lại danh sách</a>
+        <video id="video-player" controls autoplay playsinline>
+            Trình duyệt không hỗ trợ thẻ video.
+        </video>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoUrl = urlParams.get('v');
+        const posterUrl = urlParams.get('img');
+
+        const videoElem = document.getElementById('video-player');
+        if (videoUrl) {
+            videoElem.src = videoUrl;
+            videoElem.poster = posterUrl || '';
+            videoElem.load();
+            videoElem.play().catch(e => console.log("Autoplay blocked:", e));
+        }
+    </script>
+</body>
+</html>

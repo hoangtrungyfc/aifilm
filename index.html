@@ -10,19 +10,21 @@
             background-color: #121212;
             color: #ffffff;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
+            box-sizing: border-box;
         }
         h1 {
             text-align: center;
             color: #ff4757;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            gap: 15px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
         .card {
             background-color: #1e1e1e;
@@ -33,7 +35,7 @@
             transition: transform 0.2s;
         }
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
         .card img {
             width: 100%;
@@ -52,23 +54,70 @@
             font-size: 14px;
             color: #aaa;
         }
+        /* Style cho phần khung phát video responsive trên Mobile */
+        #player-section {
+            display: none;
+            max-width: 800px;
+            margin: 20px auto;
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .video-responsive {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+        }
+        .video-responsive iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            display: block;
+        }
+        .back-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .back-btn:hover {
+            background: #ff6b81;
+        }
+        /* Tối ưu riêng cho màn hình điện thoại nhỏ */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .video-responsive iframe {
+                height: 320px; /* Thu gọn chiều cao cho vừa khít màn hình phone */
+            }
+        }
     </style>
 </head>
 <body>
 
     <h1>Asian Dancer Exclusive</h1>
     
-    <div class="grid-container">
+    <!-- Phần danh sách video dạng lưới -->
+    <div class="grid-container" id="video-list">
         <!-- Video Item 1 -->
-        <div class="card" onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+        <div class="card" onclick="playVideo('https://t.me/videoasiandancerclub/2')">
             <img src="https://picsum.photos/300/180?random=1" alt="Thumbnail">
             <div class="card-content">
                 <div class="card-title">Bộ sưu tập Tập 1: Hot Cheerleader</div>
                 <div class="card-sub">Xem ngay bản Full HD</div>
             </div>
         </div>
-        <!-- Video Item 2 -->
-        <div class="card" onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+        <!-- Video Item 2 (Bạn có thể nhân bản card này ra và thay link bài đăng Telegram khác vào) -->
+        <div class="card" onclick="playVideo('https://t.me/videoasiandancerclub/2')">
             <img src="https://picsum.photos/300/180?random=2" alt="Thumbnail">
             <div class="card-content">
                 <div class="card-title">Bộ sưu tập Tập 2: Special Stage</div>
@@ -76,7 +125,7 @@
             </div>
         </div>
         <!-- Video Item 3 -->
-        <div class="card" onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+        <div class="card" onclick="playVideo('https://t.me/videoasiandancerclub/2')">
             <img src="https://picsum.photos/300/180?random=3" alt="Thumbnail">
             <div class="card-content">
                 <div class="card-title">Bộ sưu tập Tập 3: Backstage Moments</div>
@@ -85,20 +134,44 @@
         </div>
     </div>
 
-    <script>
-        // Biến lưu trạng thái click để kích hoạt Smartlink Popunder (chỉ kích hoạt 1 lần cho mỗi phiên duyệt web đỡ bị phản cảm)
-        let clicked = false;
-        const smartlinkURL = "https://YOUR_SMARTLINK_HERE"; // Thay link CrakRevenue vào đây
+    <!-- Khu vực hiển thị trình phát video (Mặc định ẩn, khi bấm vào card sẽ hiện ra) -->
+    <div id="player-section">
+        <button class="back-btn" onclick="goBack()">⬅ Quay lại danh sách</button>
+        <div class="video-responsive">
+            <iframe id="telegram-iframe" src="" allowfullscreen></iframe>
+        </div>
+    </div>
 
-        function openVideo(videoUrl) {
+    <script>
+        // Cờ lưu trạng thái để kích hoạt Smartlink Popunder 1 lần duy nhất mỗi phiên
+        let clicked = false;
+        const smartlinkURL = "https://YOUR_SMARTLINK_HERE"; // Nhớ thay link CrakRevenue của bạn vào đây
+
+        function playVideo(tgVideoUrl) {
+            // 1. Kích hoạt Popunder Smartlink khi người dùng tương tác click đầu tiên
             if (!clicked) {
-                // Mở smartlink thành tab mới (popunder)
                 window.open(smartlinkURL, '_blank');
                 clicked = true;
             }
-            // Sau khi bật popunder, chuyển hướng người dùng đến trang xem video hoặc phát video
-            alert("Đang chuyển tới trình phát video...");
-            // window.location.href = videoUrl; // Bỏ comment dòng này nếu muốn chuyển hướng thật
+
+            // 2. Ẩn danh sách video đi và hiện khung phát video lên
+            document.getElementById('video-list').style.display = 'none';
+            let playerSection = document.getElementById('player-section');
+            playerSection.style.display = 'block';
+
+            // 3. Nạp link Telegram vào iframe kèm thông số embed để tối ưu giao diện
+            let embedUrl = tgVideoUrl + "?embed=1";
+            document.getElementById('telegram-iframe').src = embedUrl;
+
+            // 4. Cuộn màn hình lên đầu trang cho điện thoại dễ nhìn
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goBack() {
+            // Đóng khung phát video và hiện lại danh sách
+            document.getElementById('player-section').style.display = 'none';
+            document.getElementById('telegram-iframe').src = ""; // Xóa source để dừng video chạy ngầm
+            document.getElementById('video-list').style.display = 'grid';
         }
     </script>
 

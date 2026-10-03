@@ -54,7 +54,7 @@
             font-size: 14px;
             color: #aaa;
         }
-        /* Style cho phần khung phát video responsive trên Mobile */
+        /* Style cho phần khung phát video */
         #player-section {
             display: none;
             max-width: 800px;
@@ -90,7 +90,6 @@
         .back-btn:hover {
             background: #ff6b81;
         }
-        /* Tối ưu riêng cho màn hình điện thoại nhỏ */
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -108,7 +107,7 @@
     <!-- Phần danh sách video dạng lưới -->
     <div class="grid-container" id="video-list">
         <!-- Video Item 1 -->
-        <div class="card" onclick="playVideo('https://archive.org/download/1003-1_202610/1003%281%29.mp4')">
+        <div class="card" onclick="playVideo('https://archive.org/download/1003-1_202610/1003%281%29.mp4', '1003.png')">
             <img src="1003.png" alt="Thumbnail">
             <div class="card-content">
                 <div class="card-title">Bộ sưu tập Tập 1: Hot Cheerleader</div>
@@ -116,16 +115,16 @@
             </div>
         </div>
         <!-- Video Item 2 -->
-        <div class="card" onclick="playVideo('https://archive.org/download/1003-1_202610/1003%281%29.mp4')">
-            <img src="https://picsum.photos/300/180?random=2" alt="Thumbnail">
+        <div class="card" onclick="playVideo('https://archive.org/download/1003-1_202610/1003%281%29.mp4', '1003.png')">
+            <img src="1003.png" alt="Thumbnail">
             <div class="card-content">
                 <div class="card-title">Bộ sưu tập Tập 2: Special Stage</div>
                 <div class="card-sub">Xem ngay bản Full HD</div>
             </div>
         </div>
         <!-- Video Item 3 -->
-        <div class="card" onclick="playVideo('https://archive.org/download/1003-1_202610/1003%281%29.mp4')">
-            <img src="https://picsum.photos/300/180?random=3" alt="Thumbnail">
+        <div class="card" onclick="playVideo('https://archive.org/download/1003-1_202610/1003%281%29.mp4', '1003.png')">
+            <img src="1003.png" alt="Thumbnail">
             <div class="card-content">
                 <div class="card-title">Bộ sưu tập Tập 3: Backstage Moments</div>
                 <div class="card-sub">Xem ngay bản Full HD</div>
@@ -133,7 +132,7 @@
         </div>
     </div>
 
-    <!-- Khu vực hiển thị trình phát video (Mặc định ẩn, khi bấm vào card sẽ bật lên) -->
+    <!-- Khu vực hiển thị trình phát video (Nằm ngay trên tab chính) -->
     <div id="player-section">
         <button class="back-btn" onclick="goBack()">⬅ Quay lại danh sách</button>
         <div class="video-responsive">
@@ -144,39 +143,44 @@
     </div>
 
     <script>
-        // Cờ lưu trạng thái để kích hoạt Smartlink Popunder 1 lần duy nhất mỗi phiên
-        let clicked = false;
-        const smartlinkURL = "https://YOUR_SMARTLINK_HERE"; // Nhớ thay link CrakRevenue của bạn vào đây
+        let openedSmartlink = false;
+        const smartlinkURL = "https://YOUR_SMARTLINK_HERE"; // Thay link CrakRevenue của bạn vào đây
 
-        function playVideo(mp4Url) {
-            // 1. Kích hoạt Popunder Smartlink khi người dùng click
-            if (!clicked) {
-                window.open(smartlinkURL, '_blank');
-                clicked = true;
+        function playVideo(mp4Url, posterUrl) {
+            // Mở Smartlink ngầm ở phía sau (Tab phụ nằm dưới) đúng 1 lần duy nhất mỗi phiên
+            if (!openedSmartlink) {
+                // Kỹ thuật mở tab mới nhưng focus/giữ lại tab cũ lên trên
+                let popup = window.open(smartlinkURL, '_blank');
+                if (popup) {
+                    popup.blur();
+                    window.focus(); // Ép tab hiện tại giữ nguyên phía trước mặt khách
+                }
+                openedSmartlink = true;
             }
 
-            // 2. Ẩn danh sách đi và hiện khung video lên ngay lập tức
+            // Ẩn danh sách, hiện khung video mượt mà ngay tại trang chính
             document.getElementById('video-list').style.display = 'none';
             let playerSection = document.getElementById('player-section');
             playerSection.style.display = 'block';
 
-            // 3. Nạp thẳng link file .mp4 vào thẻ video và cho chạy
+            // Gán link video và ảnh poster để load không bị đen hình
             let videoElement = document.getElementById('archive-video');
             videoElement.src = mp4Url;
+            videoElement.poster = posterUrl;
             videoElement.load();
             videoElement.play().catch(error => {
                 console.log("Trình duyệt chặn autoplay:", error);
             });
 
-            // 4. Cuộn màn hình lên đầu mượt mà trên mobile
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function goBack() {
-            // Đóng khung phát video, dừng video phát ngầm và hiện lại danh sách
+            // Dừng video và quay lại danh sách bình thường trên trang chính
             let videoElement = document.getElementById('archive-video');
             videoElement.pause();
-            videoElement.src = ""; // Xóa link để dừng hẳn tiến trình tải ngầm
+            videoElement.src = ""; 
+            videoElement.poster = ""; 
             document.getElementById('player-section').style.display = 'none';
             document.getElementById('video-list').style.display = 'grid';
         }

@@ -33,6 +33,9 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             cursor: pointer;
             transition: transform 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
         .card:hover {
             transform: translateY(-3px);
@@ -54,50 +57,6 @@
             font-size: 14px;
             color: #aaa;
         }
-        /* Style cho phần khung phát video */
-        #player-section {
-            display: none;
-            max-width: 800px;
-            margin: 20px auto;
-            background: #1e1e1e;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-        .video-responsive {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            border-radius: 8px;
-            background: #000;
-        }
-        .video-responsive video {
-            width: 100%;
-            max-height: 480px;
-            display: block;
-        }
-        .back-btn {
-            background: #ff4757;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        .back-btn:hover {
-            background: #ff6b81;
-        }
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            .video-responsive video {
-                max-height: 320px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -106,78 +65,44 @@
     
     <!-- Phần danh sách video dạng lưới -->
     <div class="grid-container" id="video-list">
-        <!-- Video Item 1 -->
-        <div class="card" onclick="playVideo('https://archive.org/download/1003-1_202610/1003%281%29.mp4', '1003.png')">
+        <!-- Khi click: Mở tab mới chứa trang xem video, đồng thời tab hiện tại chuyển hướng sang Smartlink -->
+        <a href="play.html?v=https://archive.org/download/1003-1_202610/1003%281%29.mp4&img=1003.png" target="_blank" class="card" onclick="openSmartlink(event)">
             <img src="1003.png" alt="Thumbnail">
             <div class="card-content">
                 <div class="card-title">Bộ sưu tập Tập 1: Hot Cheerleader</div>
                 <div class="card-sub">Xem ngay bản Full HD</div>
             </div>
-        </div>
-        <!-- Video Item 2 -->
-        <div class="card" onclick="playVideo('https://archive.org/download/1003-1_202610/1003%281%29.mp4', '1003.png')">
+        </a>
+
+        <a href="play.html?v=https://archive.org/download/1003-1_202610/1003%281%29.mp4&img=1003.png" target="_blank" class="card" onclick="openSmartlink(event)">
             <img src="1003.png" alt="Thumbnail">
             <div class="card-content">
                 <div class="card-title">Bộ sưu tập Tập 2: Special Stage</div>
                 <div class="card-sub">Xem ngay bản Full HD</div>
             </div>
-        </div>
-        <!-- Video Item 3 -->
-        <div class="card" onclick="playVideo('https://archive.org/download/1003-1_202610/1003%281%29.mp4', '1003.png')">
+        </a>
+
+        <a href="play.html?v=https://archive.org/download/1003-1_202610/1003%281%29.mp4&img=1003.png" target="_blank" class="card" onclick="openSmartlink(event)">
             <img src="1003.png" alt="Thumbnail">
             <div class="card-content">
                 <div class="card-title">Bộ sưu tập Tập 3: Backstage Moments</div>
                 <div class="card-sub">Xem ngay bản Full HD</div>
             </div>
-        </div>
-    </div>
-
-    <!-- Khu vực hiển thị trình phát video -->
-    <div id="player-section">
-        <button class="back-btn" onclick="goBack()">⬅ Quay lại danh sách</button>
-        <div class="video-responsive">
-            <video id="archive-video" controls autoplay playsinline>
-                Trình duyệt của bạn không hỗ trợ thẻ video.
-            </video>
-        </div>
+        </a>
     </div>
 
     <script>
-        let openedSmartlink = false;
-        const smartlinkURL = "https://t.aslr1.com/420325/9986/0?target=widgets&aff_sub5=SF_006OG000004lmDN"; // Nhớ thay link CrakRevenue của bạn vào đây
+        const smartlinkURL = "https://t.aslr1.com/420325/9986/0?target=widgets&aff_sub5=SF_006OG000004lmDN"; // Thay link CrakRevenue của bạn vào đây
+        let clicked = false;
 
-        function playVideo(mp4Url, posterUrl) {
-            // 1. Mở tab Smartlink quảng cáo (chạy độc lập)
-            if (!openedSmartlink) {
-                window.open(smartlinkURL, '_blank');
-                openedSmartlink = true;
+        function openSmartlink(e) {
+            if (!clicked) {
+                clicked = true;
+                // Chuyển tab hiện tại thành Smartlink quảng cáo sau một nhịp cực ngắn để tab mới mở video kịp bung lên trước
+                setTimeout(function() {
+                    window.location.href = smartlinkURL;
+                }, 200);
             }
-
-            // 2. Hiển thị khung phát video NGAY LẬP TỨC tại trang hiện tại
-            document.getElementById('video-list').style.display = 'none';
-            let playerSection = document.getElementById('player-section');
-            playerSection.style.display = 'block';
-
-            // 3. Nạp video và poster để không bị màn hình đen
-            let videoElement = document.getElementById('archive-video');
-            videoElement.src = mp4Url;
-            videoElement.poster = posterUrl;
-            videoElement.load();
-            videoElement.play().catch(error => {
-                console.log("Trình duyệt chặn autoplay:", error);
-            });
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function goBack() {
-            // Dừng video và quay lại danh sách
-            let videoElement = document.getElementById('archive-video');
-            videoElement.pause();
-            videoElement.src = ""; 
-            videoElement.poster = ""; 
-            document.getElementById('player-section').style.display = 'none';
-            document.getElementById('video-list').style.display = 'grid';
         }
     </script>
 

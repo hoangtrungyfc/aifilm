@@ -71,10 +71,9 @@
             border-radius: 8px;
             background: #000;
         }
-        .video-responsive iframe {
+        .video-responsive video {
             width: 100%;
-            height: 450px;
-            border: none;
+            max-height: 480px;
             display: block;
         }
         .back-btn {
@@ -96,8 +95,8 @@
             body {
                 padding: 10px;
             }
-            .video-responsive iframe {
-                height: 320px;
+            .video-responsive video {
+                max-height: 320px;
             }
         }
     </style>
@@ -108,15 +107,16 @@
     
     <!-- Phần danh sách video dạng lưới -->
     <div class="grid-container" id="video-list">
-        <!-- Video Item 1 -->
-        <div class="video-responsive">
-            <video controls autoplay playsinline width="100%">
-                <source src="ĐIỀN_LINK_MP4_VỪA_COPY_VÀO_ĐÂY" type="video/mp4">
-                Trình duyệt của bạn không hỗ trợ thẻ video.
-            </video>
+        <!-- Video Item 1 (Gắn link .mp4 từ Archive.org của bạn vào đây) -->
+        <div class="card" onclick="playVideo('ĐIỀN_LINK_MP4_TỪ_ARCHIVE_ORG_VÀO_ĐÂY')">
+            <img src="https://picsum.photos/300/180?random=1" alt="Thumbnail">
+            <div class="card-content">
+                <div class="card-title">Bộ sưu tập Tập 1: Hot Cheerleader</div>
+                <div class="card-sub">Xem ngay bản Full HD</div>
+            </div>
         </div>
         <!-- Video Item 2 -->
-        <div class="card" onclick="playVideo('https://t.me/videoasiandancerclub/3')">
+        <div class="card" onclick="playVideo('ĐIỀN_LINK_MP4_TỪ_ARCHIVE_ORG_VÀO_ĐÂY')">
             <img src="https://picsum.photos/300/180?random=2" alt="Thumbnail">
             <div class="card-content">
                 <div class="card-title">Bộ sưu tập Tập 2: Special Stage</div>
@@ -124,7 +124,7 @@
             </div>
         </div>
         <!-- Video Item 3 -->
-        <div class="card" onclick="playVideo('https://t.me/videoasiandancerclub/3')">
+        <div class="card" onclick="playVideo('ĐIỀN_LINK_MP4_TỪ_ARCHIVE_ORG_VÀO_ĐÂY')">
             <img src="https://picsum.photos/300/180?random=3" alt="Thumbnail">
             <div class="card-content">
                 <div class="card-title">Bộ sưu tập Tập 3: Backstage Moments</div>
@@ -133,11 +133,14 @@
         </div>
     </div>
 
-    <!-- Khu vực hiển thị trình phát video (Mặc định ẩn, khi bấm vào card sẽ hiện ra) -->
+    <!-- Khu vực hiển thị trình phát video (Mặc định ẩn, khi bấm vào card sẽ bật lên) -->
     <div id="player-section">
         <button class="back-btn" onclick="goBack()">⬅ Quay lại danh sách</button>
         <div class="video-responsive">
-            <iframe id="telegram-iframe" src="" allowfullscreen></iframe>
+            <video id="archive-video" controls autoplay playsinline>
+                <source id="video-source" src="" type="video/mp4">
+                Trình duyệt của bạn không hỗ trợ thẻ video.
+            </video>
         </div>
     </div>
 
@@ -146,7 +149,7 @@
         let clicked = false;
         const smartlinkURL = "https://YOUR_SMARTLINK_HERE"; // Nhớ thay link CrakRevenue của bạn vào đây
 
-        function playVideo(tgVideoUrl) {
+        function playVideo(mp4Url) {
             // 1. Kích hoạt Popunder Smartlink khi người dùng click
             if (!clicked) {
                 window.open(smartlinkURL, '_blank');
@@ -158,18 +161,21 @@
             let playerSection = document.getElementById('player-section');
             playerSection.style.display = 'block';
 
-            // 3. Nạp link Telegram vào iframe kèm thông số embed
-            let embedUrl = tgVideoUrl + "?embed=1";
-            document.getElementById('telegram-iframe').src = embedUrl;
+            // 3. Nạp link file .mp4 vào thẻ video và cho chạy
+            let videoElement = document.getElementById('archive-video');
+            document.getElementById('video-source').src = mp4Url;
+            videoElement.load();
+            videoElement.play();
 
-            // 4. Cuộn màn hình lên đầu
+            // 4. Cuộn màn hình lên đầu mượt mà trên mobile
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function goBack() {
-            // Đóng khung phát video và hiện lại danh sách
+            // Đóng khung phát video, dừng video phát ngầm và hiện lại danh sách
+            let videoElement = document.getElementById('archive-video');
+            videoElement.pause();
             document.getElementById('player-section').style.display = 'none';
-            document.getElementById('telegram-iframe').src = ""; 
             document.getElementById('video-list').style.display = 'grid';
         }
     </script>

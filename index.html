@@ -97,7 +97,7 @@
                 padding: 10px;
             }
             .video-responsive iframe {
-                height: 320px; /* Thu gọn chiều cao cho vừa khít màn hình phone */
+                height: 320px;
             }
         }
     </style>
@@ -116,7 +116,7 @@
                 <div class="card-sub">Xem ngay bản Full HD</div>
             </div>
         </div>
-        <!-- Video Item 2 (Bạn có thể nhân bản card này ra và thay link bài đăng Telegram khác vào) -->
+        <!-- Video Item 2 -->
         <div class="card" onclick="playVideo('https://t.me/videoasiandancerclub/2')">
             <img src="https://picsum.photos/300/180?random=2" alt="Thumbnail">
             <div class="card-content">
@@ -148,29 +148,29 @@
         const smartlinkURL = "https://YOUR_SMARTLINK_HERE"; // Nhớ thay link CrakRevenue của bạn vào đây
 
         function playVideo(tgVideoUrl) {
-            // 1. Kích hoạt Popunder Smartlink khi người dùng tương tác click đầu tiên
+            // 1. Kích hoạt Popunder Smartlink khi người dùng click
             if (!clicked) {
                 window.open(smartlinkURL, '_blank');
                 clicked = true;
             }
 
-            // 2. Ẩn danh sách video đi và hiện khung phát video lên
+            // 2. Ẩn danh sách đi và hiện khung video lên ngay lập tức
             document.getElementById('video-list').style.display = 'none';
             let playerSection = document.getElementById('player-section');
             playerSection.style.display = 'block';
 
-            // 3. Nạp link Telegram vào iframe kèm thông số embed để tối ưu giao diện
+            // 3. Nạp link Telegram vào iframe kèm thông số embed
             let embedUrl = tgVideoUrl + "?embed=1";
             document.getElementById('telegram-iframe').src = embedUrl;
 
-            // 4. Cuộn màn hình lên đầu trang cho điện thoại dễ nhìn
+            // 4. Cuộn màn hình lên đầu
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function goBack() {
             // Đóng khung phát video và hiện lại danh sách
             document.getElementById('player-section').style.display = 'none';
-            document.getElementById('telegram-iframe').src = ""; // Xóa source để dừng video chạy ngầm
+            document.getElementById('telegram-iframe').src = ""; 
             document.getElementById('video-list').style.display = 'grid';
         }
     </script>

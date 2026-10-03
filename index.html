@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asian Dancer - Hot Videos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #ff4757;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 15px;
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .card-sub {
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Asian Dancer Exclusive</h1>
+    
+    <div class="grid-container">
+        <!-- Video Item 1 -->
+        <div class="card" onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+            <img src="https://picsum.photos/300/180?random=1" alt="Thumbnail">
+            <div class="card-content">
+                <div class="card-title">Bộ sưu tập Tập 1: Hot Cheerleader</div>
+                <div class="card-sub">Xem ngay bản Full HD</div>
+            </div>
+        </div>
+        <!-- Video Item 2 -->
+        <div class="card" onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+            <img src="https://picsum.photos/300/180?random=2" alt="Thumbnail">
+            <div class="card-content">
+                <div class="card-title">Bộ sưu tập Tập 2: Special Stage</div>
+                <div class="card-sub">Xem ngay bản Full HD</div>
+            </div>
+        </div>
+        <!-- Video Item 3 -->
+        <div class="card" onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+            <img src="https://picsum.photos/300/180?random=3" alt="Thumbnail">
+            <div class="card-content">
+                <div class="card-title">Bộ sưu tập Tập 3: Backstage Moments</div>
+                <div class="card-sub">Xem ngay bản Full HD</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Biến lưu trạng thái click để kích hoạt Smartlink Popunder (chỉ kích hoạt 1 lần cho mỗi phiên duyệt web đỡ bị phản cảm)
+        let clicked = false;
+        const smartlinkURL = "https://YOUR_SMARTLINK_HERE"; // Thay link CrakRevenue vào đây
+
+        function openVideo(videoUrl) {
+            if (!clicked) {
+                // Mở smartlink thành tab mới (popunder)
+                window.open(smartlinkURL, '_blank');
+                clicked = true;
+            }
+            // Sau khi bật popunder, chuyển hướng người dùng đến trang xem video hoặc phát video
+            alert("Đang chuyển tới trình phát video...");
+            // window.location.href = videoUrl; // Bỏ comment dòng này nếu muốn chuyển hướng thật
+        }
+    </script>
+
+</body>
+</html>

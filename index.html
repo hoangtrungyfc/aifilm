@@ -107,7 +107,7 @@
     
     <!-- Phần danh sách video dạng lưới -->
     <div class="grid-container" id="video-list">
-        <!-- Video Item 1 (Gắn link .mp4 từ Archive.org của bạn vào đây) -->
+        <!-- Video Item 1 -->
         <div class="card" onclick="playVideo('https://archive.org/download/1003-1_202610/1003%281%29.mp4')">
             <img src="https://picsum.photos/300/180?random=1" alt="Thumbnail">
             <div class="card-content">
@@ -138,7 +138,6 @@
         <button class="back-btn" onclick="goBack()">⬅ Quay lại danh sách</button>
         <div class="video-responsive">
             <video id="archive-video" controls autoplay playsinline>
-                <source id="video-source" src="" type="video/mp4">
                 Trình duyệt của bạn không hỗ trợ thẻ video.
             </video>
         </div>
@@ -161,11 +160,13 @@
             let playerSection = document.getElementById('player-section');
             playerSection.style.display = 'block';
 
-            // 3. Nạp link file .mp4 vào thẻ video và cho chạy
+            // 3. Nạp thẳng link file .mp4 vào thẻ video và cho chạy
             let videoElement = document.getElementById('archive-video');
-            document.getElementById('video-source').src = mp4Url;
+            videoElement.src = mp4Url;
             videoElement.load();
-            videoElement.play();
+            videoElement.play().catch(error => {
+                console.log("Trình duyệt chặn autoplay:", error);
+            });
 
             // 4. Cuộn màn hình lên đầu mượt mà trên mobile
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -175,6 +176,7 @@
             // Đóng khung phát video, dừng video phát ngầm và hiện lại danh sách
             let videoElement = document.getElementById('archive-video');
             videoElement.pause();
+            videoElement.src = ""; // Xóa link để dừng hẳn tiến trình tải ngầm
             document.getElementById('player-section').style.display = 'none';
             document.getElementById('video-list').style.display = 'grid';
         }

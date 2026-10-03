@@ -132,7 +132,7 @@
         </div>
     </div>
 
-    <!-- Khu vực hiển thị trình phát video (Nằm ngay trên tab chính) -->
+    <!-- Khu vực hiển thị trình phát video -->
     <div id="player-section">
         <button class="back-btn" onclick="goBack()">⬅ Quay lại danh sách</button>
         <div class="video-responsive">
@@ -144,26 +144,21 @@
 
     <script>
         let openedSmartlink = false;
-        const smartlinkURL = "https://YOUR_SMARTLINK_HERE"; // Thay link CrakRevenue của bạn vào đây
+        const smartlinkURL = "https://YOUR_SMARTLINK_HERE"; // Nhớ thay link CrakRevenue của bạn vào đây
 
         function playVideo(mp4Url, posterUrl) {
-            // Mở Smartlink ngầm ở phía sau (Tab phụ nằm dưới) đúng 1 lần duy nhất mỗi phiên
+            // 1. Mở tab Smartlink quảng cáo (chạy độc lập)
             if (!openedSmartlink) {
-                // Kỹ thuật mở tab mới nhưng focus/giữ lại tab cũ lên trên
-                let popup = window.open(smartlinkURL, '_blank');
-                if (popup) {
-                    popup.blur();
-                    window.focus(); // Ép tab hiện tại giữ nguyên phía trước mặt khách
-                }
+                window.open(smartlinkURL, '_blank');
                 openedSmartlink = true;
             }
 
-            // Ẩn danh sách, hiện khung video mượt mà ngay tại trang chính
+            // 2. Hiển thị khung phát video NGAY LẬP TỨC tại trang hiện tại
             document.getElementById('video-list').style.display = 'none';
             let playerSection = document.getElementById('player-section');
             playerSection.style.display = 'block';
 
-            // Gán link video và ảnh poster để load không bị đen hình
+            // 3. Nạp video và poster để không bị màn hình đen
             let videoElement = document.getElementById('archive-video');
             videoElement.src = mp4Url;
             videoElement.poster = posterUrl;
@@ -176,7 +171,7 @@
         }
 
         function goBack() {
-            // Dừng video và quay lại danh sách bình thường trên trang chính
+            // Dừng video và quay lại danh sách
             let videoElement = document.getElementById('archive-video');
             videoElement.pause();
             videoElement.src = ""; 

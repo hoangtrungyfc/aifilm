@@ -1,245 +1,206 @@
 ```html
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script>
 
-    <title>Asian Dancer - Hot Videos</title>
+const smartlinkURL =
+"https://t.aslr1.com/420325/9986/0?target=widgets&aff_sub5=SF_006OG000004lmDN";
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        html, body {
-            margin: 0;
-            padding: 0;
-            background: #121212;
-            color: #fff;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            padding: 10px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #ff4757;
-            font-size: 21px;
-            margin: 8px 0 16px;
-        }
-
-        /* =========================
-           VIDEO LIST
-        ========================= */
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            width: 100%;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: #1e1e1e;
-            border-radius: 8px;
-            overflow: hidden;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .card:active {
-            transform: scale(0.98);
-        }
-
-        .card img {
-            display: block;
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-        }
-
-        .card-content {
-            padding: 12px;
-        }
-
-        .card-title {
-            font-size: 16px;
-            line-height: 1.35;
-            font-weight: bold;
-        }
-
-        .card-sub {
-            margin-top: 5px;
-            font-size: 13px;
-            color: #aaa;
-        }
+let openedSmartlink = false;
 
 
-        /* =========================
-           PLAYER
-        ========================= */
+/*
+=========================================
+MỞ PHIM
+=========================================
+*/
 
-        #player-section {
-            display: none;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+function openVideoAndSmartlink(mp4Url, posterUrl, titleText) {
 
-        .back-btn {
-            display: block;
-            width: 100%;
-            background: #ff4757;
-            color: #fff;
-            border: 0;
-            border-radius: 6px;
+    /*
+    -----------------------------------------
+    1. HIỆN PLAYER TRƯỚC
+    -----------------------------------------
+    */
 
-            padding: 12px;
-            margin-bottom: 10px;
+    const videoList =
+        document.getElementById("video-list");
 
-            font-size: 15px;
-            font-weight: bold;
+    const playerSection =
+        document.getElementById("player-section");
 
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-        }
+    const pageTitle =
+        document.getElementById("page-title");
 
-        .back-btn:active {
-            opacity: 0.8;
-        }
-
-        .video-responsive {
-            width: 100%;
-            background: #000;
-            border-radius: 7px;
-            overflow: hidden;
-        }
-
-        .video-responsive video {
-            display: block;
-            width: 100%;
-            height: auto;
-            max-height: 80vh;
-            background: #000;
-        }
+    const video =
+        document.getElementById("archive-video");
 
 
-        /* =========================
-           DESKTOP
-        ========================= */
+    videoList.style.display = "none";
 
-        @media (min-width: 700px) {
+    playerSection.style.display = "block";
 
-            body {
-                padding: 15px;
+    pageTitle.innerText = titleText;
+
+
+    /*
+    -----------------------------------------
+    2. NẠP VIDEO
+    -----------------------------------------
+    */
+
+    video.pause();
+
+    video.src = mp4Url;
+
+    video.poster = posterUrl;
+
+    video.load();
+
+
+    /*
+    -----------------------------------------
+    3. ĐƯA PLAYER LÊN ĐẦU
+    -----------------------------------------
+    */
+
+    window.scrollTo(0, 0);
+
+
+    /*
+    -----------------------------------------
+    4. PHÁT VIDEO
+    -----------------------------------------
+    */
+
+    video.play().catch(function(error) {
+
+        console.log(
+            "Autoplay bị trình duyệt chặn:",
+            error
+        );
+
+    });
+
+
+    /*
+    -----------------------------------------
+    5. MỞ SMARTLINK
+    -----------------------------------------
+    
+    Chờ một chút để đảm bảo player đã
+    được hiển thị trước khi mở tab mới.
+    */
+
+    if (!openedSmartlink) {
+
+        setTimeout(function() {
+
+            try {
+
+                const newTab =
+                    window.open(
+                        smartlinkURL,
+                        "_blank"
+                    );
+
+
+                if (newTab) {
+
+                    openedSmartlink = true;
+
+                    /*
+                    Cố gắng giữ trang phim
+                    ở phía trước.
+                    */
+
+                    setTimeout(function() {
+
+                        try {
+                            window.focus();
+                        } catch (e) {}
+
+                    }, 100);
+
+                }
+
+            } catch (error) {
+
+                console.log(
+                    "Không thể mở Smartlink:",
+                    error
+                );
+
             }
 
-            .grid-container {
-                grid-template-columns:
-                    repeat(auto-fit, minmax(280px, 1fr));
-            }
+        }, 150);
 
-            h1 {
-                font-size: 24px;
-            }
+    }
 
-            .card img {
-                height: 180px;
-                aspect-ratio: auto;
-            }
-
-        }
-    </style>
-</head>
-
-<body>
-
-    <h1 id="page-title">
-        Asian Dancer Exclusive
-    </h1>
+}
 
 
-    <!-- =========================
-         VIDEO LIST
-    ========================= -->
+/*
+=========================================
+QUAY LẠI DANH SÁCH
+=========================================
+*/
 
-    <div class="grid-container" id="video-list">
+function goBack() {
 
+    const video =
+        document.getElementById("archive-video");
 
-        <!-- VIDEO 1 -->
+    const videoList =
+        document.getElementById("video-list");
 
-        <div class="card"
-             onclick="openVideoAndSmartlink(
-                'https://archive.org/download/1003-1_202610/1003%281%29.mp4',
-                '1003.png',
-                'Promiscuous Fiancee'
-             )">
+    const playerSection =
+        document.getElementById("player-section");
 
-            <img src="1003.png" alt="Promiscuous Fiancee">
-
-            <div class="card-content">
-
-                <div class="card-title">
-                    Promiscuous Fiancee
-                </div>
-
-                <div class="card-sub">
-                    Full HD
-                </div>
-
-            </div>
-        </div>
+    const pageTitle =
+        document.getElementById("page-title");
 
 
-        <!-- VIDEO 2 -->
+    /*
+    Dừng video
+    */
 
-        <div class="card"
-             onclick="openVideoAndSmartlink(
-                'https://archive.org/download/1004_20261004/1004.mp4',
-                '1004.png',
-                'Stranded on a Desert Island with 4 Sexy Girls'
-             )">
-
-            <img src="1004.png"
-                 alt="Stranded on a Desert Island with 4 Sexy Girls">
-
-            <div class="card-content">
-
-                <div class="card-title">
-                    Stranded on a Desert Island with 4 Sexy Girls
-                </div>
-
-                <div class="card-sub">
-                    Full HD
-                </div>
-
-            </div>
-        </div>
+    video.pause();
 
 
-        <!-- VIDEO 3 -->
+    /*
+    Xóa video hiện tại
+    */
 
-        <div class="card"
-             onclick="openVideoAndSmartlink(
-                'https://archive.org/download/1003-1_202610/1003%281%29.mp4',
-                '1003.png',
-                'Bộ sưu tập Tập 3: Backstage Moments'
-             )">
+    video.removeAttribute("src");
 
-            <img src="1003.png"
-                 alt="Backstage Moments">
+    video.removeAttribute("poster");
 
-            <div class="card-content">
+    video.load();
 
-                <div class="card-title">
-                    Bộ sưu tập Tập 3: Backstage Moments
-                </div>
 
-                <div class="card-sub">
+    /*
+    Hiện lại danh sách
+    */
+
+    playerSection.style.display = "none";
+
+    videoList.style.display = "grid";
+
+
+    /*
+    Đổi tiêu đề
+    */
+
+    pageTitle.innerText =
+        "Asian Dancer Exclusive";
+
+
+    /*
+    Về đầu trang
+    */
+
+    window.scrollTo(0, 0);
+
+}
+
+</script>
 ```

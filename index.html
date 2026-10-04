@@ -198,67 +198,127 @@
         }
 
         /* =========================
-           AI PUSH-STYLE NOTIFICATION
+           AI 18+ MESSENGER-STYLE MESSAGE
+           Hiện sau 5 giây và cố định ở đáy màn hình
         ========================= */
 
         #ai-push-notification {
             position: fixed;
-            top: 14px;
-            right: 14px;
+            left: auto;
+            right: 12px;
+            bottom: calc(14px + env(safe-area-inset-bottom, 0px));
             z-index: 100000;
-            width: min(360px, calc(100vw - 28px));
-            padding: 12px 42px 12px 14px;
-            background: rgba(255, 255, 255, 0.98);
-            color: #171717;
-            border-radius: 14px;
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(0, 0, 0, 0.12);
+            width: min(360px, calc(100vw - 24px));
             display: none;
-            cursor: pointer;
-            transform: translateY(-18px);
-            opacity: 0;
-            transition: opacity 0.25s ease, transform 0.25s ease;
+            background: #ffffff;
+            color: #171717;
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            overflow: hidden;
             -webkit-tap-highlight-color: transparent;
         }
 
         #ai-push-notification.show {
             display: block;
-            opacity: 1;
-            transform: translateY(0);
+        }
+
+        .ai-push-message {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px 42px 12px 12px;
+            min-height: 76px;
+            cursor: pointer;
+        }
+
+        .ai-push-avatar {
+            flex: 0 0 44px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px dashed #999;
+            background: #f3f3f3;
+            color: #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 8px;
+            font-weight: bold;
+            line-height: 1.05;
+        }
+
+        .ai-push-content {
+            min-width: 0;
+            padding-top: 1px;
+        }
+
+        .ai-push-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 3px;
         }
 
         .ai-push-title {
             font-size: 13px;
-            font-weight: bold;
-            color: #777;
-            margin-bottom: 4px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        .ai-push-time {
+            font-size: 11px;
+            color: #999;
         }
 
         .ai-push-text {
-            font-size: 15px;
+            font-size: 14px;
             line-height: 1.35;
-            font-weight: 700;
+            font-weight: 600;
+            color: #333;
         }
 
         .ai-push-close {
             position: absolute;
             top: 5px;
-            right: 7px;
+            right: 6px;
             width: 34px;
             height: 34px;
             border: 0;
+            border-radius: 50%;
             background: transparent;
-            color: #555;
-            font-size: 23px;
+            color: #777;
+            font-size: 22px;
             line-height: 34px;
             cursor: pointer;
+            z-index: 2;
+        }
+
+        .ai-push-close:active {
+            background: #eee;
         }
 
         @media (max-width: 480px) {
             #ai-push-notification {
-                top: 10px;
                 right: 10px;
+                bottom: calc(10px + env(safe-area-inset-bottom, 0px));
                 width: calc(100vw - 20px);
+            }
+
+            .ai-push-message {
+                min-height: 72px;
+                padding: 11px 40px 11px 11px;
+            }
+
+            .ai-push-avatar {
+                flex-basis: 42px;
+                width: 42px;
+                height: 42px;
+            }
+
+            .ai-push-text {
+                font-size: 13.5px;
             }
         }
 
@@ -542,7 +602,7 @@
                target="_blank"
                rel="noopener noreferrer"
                aria-label="Open Stake offer">
-                <img src="stake-ad.png"
+                <img src="stake-ad.jpg"
                      alt="Stake promotional offer - promo code DANCERCLUB"
                      class="stake-ad-image">
             </a>
@@ -556,9 +616,7 @@
     ========================= -->
 
     <div id="ai-push-notification"
-         role="button"
-         tabindex="0"
-         aria-label="AI girlfriend offer">
+         aria-label="AI girlfriend message">
 
         <button class="ai-push-close"
                 id="ai-push-close"
@@ -567,12 +625,26 @@
             &times;
         </button>
 
-        <div class="ai-push-title">AI GIRLFRIEND</div>
+        <div class="ai-push-message"
+             id="ai-push-message">
 
-        <div class="ai-push-text">
-            Create a sexy AI girlfriend and do whatever you want with her
+            <!-- AVATAR PLACEHOLDER: thay ảnh avatar sau -->
+            <div class="ai-push-avatar">
+                AVATAR
+            </div>
+
+            <div class="ai-push-content">
+                <div class="ai-push-header">
+                    <div class="ai-push-title">AI Girlfriend</div>
+                    <div class="ai-push-time">now</div>
+                </div>
+
+                <div class="ai-push-text">
+                    Create a sexy AI girlfriend and do whatever you want with her
+                </div>
+            </div>
+
         </div>
-
     </div>
 
 
@@ -622,15 +694,29 @@
         const aiPushClose =
             document.getElementById("ai-push-close");
 
+        const aiPushMessage =
+            document.getElementById("ai-push-message");
+
         let aiPushClosed = false;
 
         function showAiPushNotification() {
             if (aiPushClosed) return;
+
+            /*
+             * Hiện sau 5 giây kể từ khi khách vào trang.
+             * Không tự biến mất.
+             * Vì phần tử dùng position: fixed + bottom nên
+             * nó vẫn nằm yên ở đáy viewport khi cuộn hoặc
+             * khi khách đang xem video.
+             */
             aiPushNotification.classList.add("show");
         }
 
         function closeAiPushNotification(event) {
-            if (event) event.stopPropagation();
+            if (event) {
+                event.stopPropagation();
+            }
+
             aiPushClosed = true;
             aiPushNotification.classList.remove("show");
         }
@@ -639,19 +725,14 @@
             window.open(AI_PUSH_URL, "_blank", "noopener,noreferrer");
         }
 
-        aiPushNotification.addEventListener("click", openAiPushOffer);
+        /* Chỉ phần nội dung tin nhắn mở offer. */
+        aiPushMessage.addEventListener("click", openAiPushOffer);
 
-        aiPushNotification.addEventListener("keydown", function (event) {
-            if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                openAiPushOffer();
-            }
-        });
-
+        /* Nút X chỉ đóng tin nhắn, không mở offer. */
         aiPushClose.addEventListener("click", closeAiPushNotification);
 
-        // Hiện thông báo sau 8 giây, không cần người dùng click video.
-        setTimeout(showAiPushNotification, 8000);
+        // Hiện thông báo sau đúng 5 giây.
+        setTimeout(showAiPushNotification, 5000);
 
 
 

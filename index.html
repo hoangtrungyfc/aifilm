@@ -132,7 +132,7 @@
         </div>
     </div>
 
-    <!-- Khu vực hiển thị trình phát video (Nằm chung ngay trong trang này) -->
+    <!-- Khu vực hiển thị trình phát video -->
     <div id="player-section">
         <button class="back-btn" onclick="goBack()">⬅ Quay lại danh sách</button>
         <div class="video-responsive">
@@ -143,26 +143,37 @@
     </div>
 
     <script>
-        const smartlinkURL = "https://t.aslr1.com/420325/9986/0?target=widgets&aff_sub5=SF_006OG000004lmDN"; // Thay link CrakRevenue của bạn vào đây
+        const smartlinkURL = "https://t.aslr1.com/420325/9986/0?target=widgets&aff_sub5=SF_006OG000004lmDN"; 
         let openedSmartlink = false;
 
         function openVideoAndSmartlink(mp4Url, posterUrl, titleText) {
-            // 1. Chuyển hướng tab hiện tại (hoặc mở smartlink) tùy ý bạn, 
-            // Ở đây ta dùng cơ chế: Bấm vào là tab hiện tại mở ngay video cho khách xem mượt mà, 
-            // đồng thời bung tab mới chạy ngầm Smartlink quảng cáo.
+            // 1. Kích hoạt Smartlink dạng mở ngầm (tránh bị nhảy đè tab lên trên mặt khách)
             if (!openedSmartlink) {
-                window.open(smartlinkURL, '_blank');
+                try {
+                    let a = document.createElement('a');
+                    a.href = smartlinkURL;
+                    a.target = '_blank';
+                    // Tạo sự kiện click giả lập ẩn để trình duyệt không focus mất tab hiện tại
+                    let clickEvent = new MouseEvent('click', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true
+                    });
+                    a.dispatchEvent(clickEvent);
+                } catch (e) {
+                    window.open(smartlinkURL, '_blank');
+                }
                 openedSmartlink = true;
             }
 
-            // 2. Ẩn lưới danh sách, hiện khung video ngay tại tab hiện tại
+            // 2. Chuyển giao diện ngay lập tức sang khung phát video cho khách xem
             document.getElementById('video-list').style.display = 'none';
             document.getElementById('page-title').innerText = titleText;
             
             let playerSection = document.getElementById('player-section');
             playerSection.style.display = 'block';
 
-            // 3. Nạp video và poster chống màn hình đen
+            // 3. Nạp video và chạy
             let videoElement = document.getElementById('archive-video');
             videoElement.src = mp4Url;
             videoElement.poster = posterUrl;
@@ -175,7 +186,6 @@
         }
 
         function goBack() {
-            // Dừng video và quay lại danh sách
             let videoElement = document.getElementById('archive-video');
             videoElement.pause();
             videoElement.src = ""; 

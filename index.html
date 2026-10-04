@@ -1,201 +1,245 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <title>Asian Dancer - Hot Videos</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            margin: 0;
-            padding: 15px;
+        * {
             box-sizing: border-box;
         }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #121212;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            padding: 10px;
+        }
+
         h1 {
             text-align: center;
             color: #ff4757;
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 21px;
+            margin: 8px 0 16px;
         }
+
+        /* =========================
+           VIDEO LIST
+        ========================= */
+
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            max-width: 1200px;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            width: 100%;
+            max-width: 700px;
             margin: 0 auto;
         }
+
         .card {
-            background-color: #1e1e1e;
+            background: #1e1e1e;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             cursor: pointer;
-            transition: transform 0.2s;
+            -webkit-tap-highlight-color: transparent;
         }
-        .card:hover {
-            transform: translateY(-3px);
+
+        .card:active {
+            transform: scale(0.98);
         }
+
         .card img {
+            display: block;
             width: 100%;
-            height: 180px;
+            height: auto;
+            aspect-ratio: 16 / 9;
             object-fit: cover;
         }
+
         .card-content {
-            padding: 15px;
+            padding: 12px;
         }
+
         .card-title {
             font-size: 16px;
+            line-height: 1.35;
             font-weight: bold;
-            margin-bottom: 5px;
         }
+
         .card-sub {
-            font-size: 14px;
+            margin-top: 5px;
+            font-size: 13px;
             color: #aaa;
         }
-        /* Style khung phát video (ẩn đi mặc định) */
+
+
+        /* =========================
+           PLAYER
+        ========================= */
+
         #player-section {
             display: none;
-            max-width: 800px;
-            margin: 20px auto;
-            background: #1e1e1e;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-        .video-responsive {
-            position: relative;
             width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: block;
+            width: 100%;
+            background: #ff4757;
+            color: #fff;
+            border: 0;
+            border-radius: 6px;
+
+            padding: 12px;
+            margin-bottom: 10px;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .back-btn:active {
+            opacity: 0.8;
+        }
+
+        .video-responsive {
+            width: 100%;
+            background: #000;
+            border-radius: 7px;
             overflow: hidden;
-            border-radius: 8px;
+        }
+
+        .video-responsive video {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
             background: #000;
         }
-        .video-responsive video {
-            width: 100%;
-            max-height: 480px;
-            display: block;
-        }
-        .back-btn {
-            background: #ff4757;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        .back-btn:hover {
-            background: #ff6b81;
-        }
-        @media (max-width: 768px) {
+
+
+        /* =========================
+           DESKTOP
+        ========================= */
+
+        @media (min-width: 700px) {
+
             body {
-                padding: 10px;
+                padding: 15px;
             }
-            .video-responsive video {
-                max-height: 320px;
+
+            .grid-container {
+                grid-template-columns:
+                    repeat(auto-fit, minmax(280px, 1fr));
             }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .card img {
+                height: 180px;
+                aspect-ratio: auto;
+            }
+
         }
     </style>
 </head>
+
 <body>
 
-    <h1 id="page-title">Asian Dancer Exclusive</h1>
-    
-    <!-- Phần danh sách video dạng lưới -->
+    <h1 id="page-title">
+        Asian Dancer Exclusive
+    </h1>
+
+
+    <!-- =========================
+         VIDEO LIST
+    ========================= -->
+
     <div class="grid-container" id="video-list">
-        <!-- Video Item 1 -->
-        <div class="card" onclick="openVideoAndSmartlink('https://archive.org/download/1003-1_202610/1003%281%29.mp4', '1003.png', 'Promiscuous Fiancee')">
-            <img src="1003.png" alt="Thumbnail">
+
+
+        <!-- VIDEO 1 -->
+
+        <div class="card"
+             onclick="openVideoAndSmartlink(
+                'https://archive.org/download/1003-1_202610/1003%281%29.mp4',
+                '1003.png',
+                'Promiscuous Fiancee'
+             )">
+
+            <img src="1003.png" alt="Promiscuous Fiancee">
+
             <div class="card-content">
-                <div class="card-title">Promiscuous Fiancee</div>
-                <div class="card-sub">Full HD</div>
+
+                <div class="card-title">
+                    Promiscuous Fiancee
+                </div>
+
+                <div class="card-sub">
+                    Full HD
+                </div>
+
             </div>
         </div>
-        <!-- Video Item 2 -->
-        <div class="card" onclick="openVideoAndSmartlink('https://archive.org/download/1004_20261004/1004.mp4', '1004.png', 'Stranded on a Desert Island with 4 Sexy Girls')">
-            <img src="1004.png" alt="Thumbnail">
+
+
+        <!-- VIDEO 2 -->
+
+        <div class="card"
+             onclick="openVideoAndSmartlink(
+                'https://archive.org/download/1004_20261004/1004.mp4',
+                '1004.png',
+                'Stranded on a Desert Island with 4 Sexy Girls'
+             )">
+
+            <img src="1004.png"
+                 alt="Stranded on a Desert Island with 4 Sexy Girls">
+
             <div class="card-content">
-                <div class="card-title">Stranded on a Desert Island with 4 Sexy Girls</div>
-                <div class="card-sub">Full HD</div>
+
+                <div class="card-title">
+                    Stranded on a Desert Island with 4 Sexy Girls
+                </div>
+
+                <div class="card-sub">
+                    Full HD
+                </div>
+
             </div>
         </div>
-        <!-- Video Item 3 -->
-        <div class="card" onclick="openVideoAndSmartlink('https://archive.org/download/1003-1_202610/1003%281%29.mp4', '1003.png', 'Bộ sưu tập Tập 3: Backstage Moments')">
-            <img src="1003.png" alt="Thumbnail">
+
+
+        <!-- VIDEO 3 -->
+
+        <div class="card"
+             onclick="openVideoAndSmartlink(
+                'https://archive.org/download/1003-1_202610/1003%281%29.mp4',
+                '1003.png',
+                'Bộ sưu tập Tập 3: Backstage Moments'
+             )">
+
+            <img src="1003.png"
+                 alt="Backstage Moments">
+
             <div class="card-content">
-                <div class="card-title">Bộ sưu tập Tập 3: Backstage Moments</div>
-                <div class="card-sub">Xem ngay bản Full HD</div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Khu vực hiển thị trình phát video -->
-    <div id="player-section">
-        <button class="back-btn" onclick="goBack()">⬅ Quay lại danh sách</button>
-        <div class="video-responsive">
-            <video id="archive-video" controls autoplay playsinline>
-                Trình duyệt của bạn không hỗ trợ thẻ video.
-            </video>
-        </div>
-    </div>
+                <div class="card-title">
+                    Bộ sưu tập Tập 3: Backstage Moments
+                </div>
 
-    <script>
-        const smartlinkURL = "https://t.aslr1.com/420325/9986/0?target=widgets&aff_sub5=SF_006OG000004lmDN"; 
-        let openedSmartlink = false;
-
-        function openVideoAndSmartlink(mp4Url, posterUrl, titleText) {
-            // 1. Kích hoạt Smartlink dạng mở ngầm (tránh bị nhảy đè tab lên trên mặt khách)
-            if (!openedSmartlink) {
-                try {
-                    let a = document.createElement('a');
-                    a.href = smartlinkURL;
-                    a.target = '_blank';
-                    // Tạo sự kiện click giả lập ẩn để trình duyệt không focus mất tab hiện tại
-                    let clickEvent = new MouseEvent('click', {
-                        view: window,
-                        bubbles: true,
-                        cancelable: true
-                    });
-                    a.dispatchEvent(clickEvent);
-                } catch (e) {
-                    window.open(smartlinkURL, '_blank');
-                }
-                openedSmartlink = true;
-            }
-
-            // 2. Chuyển giao diện ngay lập tức sang khung phát video cho khách xem
-            document.getElementById('video-list').style.display = 'none';
-            document.getElementById('page-title').innerText = titleText;
-            
-            let playerSection = document.getElementById('player-section');
-            playerSection.style.display = 'block';
-
-            // 3. Nạp video và chạy
-            let videoElement = document.getElementById('archive-video');
-            videoElement.src = mp4Url;
-            videoElement.poster = posterUrl;
-            videoElement.load();
-            videoElement.play().catch(error => {
-                console.log("Trình duyệt chặn autoplay:", error);
-            });
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function goBack() {
-            let videoElement = document.getElementById('archive-video');
-            videoElement.pause();
-            videoElement.src = ""; 
-            videoElement.poster = ""; 
-            
-            document.getElementById('player-section').style.display = 'none';
-            document.getElementById('video-list').style.display = 'grid';
-            document.getElementById('page-title').innerText = "Asian Dancer Exclusive";
-        }
-    </script>
-
-</body>
-</html>
+                <div class="card-sub">
+```

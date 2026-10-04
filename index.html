@@ -217,9 +217,11 @@
         .ad-box {
             position: relative;
             width: min(92vw, 420px);
+            max-height: 90vh;
+            overflow: auto;
             background: #1e1e1e;
             border-radius: 12px;
-            padding: 28px 20px 22px;
+            padding: 10px;
             text-align: center;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
         }
@@ -257,23 +259,21 @@
             font-size: 22px;
         }
 
-        .ad-box p {
-            margin: 0 0 17px;
-            color: #bbb;
-            font-size: 14px;
-            line-height: 1.45;
+        .stake-image-link {
+            display: block;
+            width: 100%;
+            text-decoration: none;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
-        .ad-cta {
-            display: inline-block;
-            min-width: 180px;
-            padding: 13px 22px;
-            border-radius: 7px;
-            background: #ff4757;
-            color: #fff;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: bold;
+        .stake-ad-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 76vh;
+            object-fit: contain;
+            border-radius: 8px;
         }
 
 
@@ -357,11 +357,11 @@
         <div class="card"
              onclick="openVideoAndSmartlink(
                  'https://archive.org/download/1003-1_202610/1003%281%29.mp4',
-                 '1003.jpg',
+                 '1003.png',
                  'Promiscuous Fiancee'
              )">
 
-            <img src="1003.png"
+            <img src="1003.jpg"
                  alt="Promiscuous Fiancee">
 
             <div class="card-content">
@@ -489,17 +489,14 @@
                     type="button"
                     aria-label="Close">×</button>
 
-            <div class="ad-badge">18+ / SPONSORED</div>
-
-            <h2>Ready to play?</h2>
-
-            <p>Check out Stake before continuing.</p>
-
-            <a class="ad-cta"
+            <a class="stake-image-link"
                href="https://stake.com/?c=3U50Vbb4"
                target="_blank"
-               rel="noopener noreferrer">
-                VISIT STAKE
+               rel="noopener noreferrer"
+               aria-label="Open Stake offer">
+                <img src="stake-ad.jpg"
+                     alt="Stake promotional offer - promo code DANCERCLUB"
+                     class="stake-ad-image">
             </a>
 
         </div>

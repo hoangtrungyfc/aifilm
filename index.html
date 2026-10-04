@@ -172,6 +172,123 @@
         }
 
 
+
+        /* =========================
+           LIVE CAM BANNER
+        ========================= */
+
+        .livecam-banner {
+            width: 100%;
+            max-width: 300px;
+            height: 100px;
+            margin: 0 auto 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .livecam-banner iframe {
+            display: block;
+            width: 300px;
+            height: 100px;
+            border: 0;
+        }
+
+
+        /* =========================
+           STAKE INTERSTITIAL
+        ========================= */
+
+        .ad-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 99990;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.78);
+        }
+
+        .ad-modal.show {
+            display: flex;
+        }
+
+        .ad-box {
+            position: relative;
+            width: min(92vw, 420px);
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 28px 20px 22px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
+        }
+
+        .ad-close {
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            width: 44px;
+            height: 44px;
+            border: 0;
+            border-radius: 50%;
+            background: #333;
+            color: #fff;
+            font-size: 26px;
+            line-height: 44px;
+            padding: 0;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .ad-badge {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 4px 8px;
+            border-radius: 5px;
+            background: #ff4757;
+            color: #fff;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .ad-box h2 {
+            margin: 4px 0 8px;
+            font-size: 22px;
+        }
+
+        .ad-box p {
+            margin: 0 0 17px;
+            color: #bbb;
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .ad-cta {
+            display: inline-block;
+            min-width: 180px;
+            padding: 13px 22px;
+            border-radius: 7px;
+            background: #ff4757;
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           DATING MID-ROLL
+        ========================= */
+
+        #dating-midroll .ad-box {
+            max-width: 430px;
+        }
+
+        #dating-midroll .ad-cta {
+            background: #ff4757;
+        }
+
         /* =========================
            DESKTOP
         ========================= */
@@ -207,6 +324,25 @@
     <h1 id="page-title">
         Asian Dancer Exclusive
     </h1>
+
+
+    <!-- =========================
+         LIVE CAM BANNER
+    ========================= -->
+
+    <div class="livecam-banner" aria-label="Live Cam">
+
+        <iframe id="livecam-banner-frame"
+                width="300"
+                height="100"
+                marginwidth="0"
+                marginheight="0"
+                frameborder="0"
+                scrolling="no"
+                title="Live Cam">
+        </iframe>
+
+    </div>
 
 
     <!-- =========================
@@ -335,20 +471,182 @@
     </div>
 
 
+    <!-- =========================
+         STAKE INTERSTITIAL
+    ========================= -->
+
+    <div id="stake-interstitial"
+         class="ad-modal"
+         aria-hidden="true">
+
+        <div class="ad-box"
+             role="dialog"
+             aria-modal="true"
+             aria-label="Sponsored offer">
+
+            <button id="stake-ad-close"
+                    class="ad-close"
+                    type="button"
+                    aria-label="Close">×</button>
+
+            <div class="ad-badge">18+ / SPONSORED</div>
+
+            <h2>Ready to play?</h2>
+
+            <p>Check out Stake before continuing.</p>
+
+            <a class="ad-cta"
+               href="https://stake.com/?c=3U50Vbb4"
+               target="_blank"
+               rel="noopener noreferrer">
+                VISIT STAKE
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         DATING MID-ROLL
+    ========================= -->
+
+    <div id="dating-midroll"
+         class="ad-modal"
+         aria-hidden="true">
+
+        <div class="ad-box"
+             role="dialog"
+             aria-modal="true"
+             aria-label="18 plus dating offer">
+
+            <button id="dating-ad-close"
+                    class="ad-close"
+                    type="button"
+                    aria-label="Close">×</button>
+
+            <div class="ad-badge">18+ / SPONSORED</div>
+
+            <h2>Meet Asian Girls</h2>
+
+            <p>Want to chat with someone new?</p>
+
+            <a class="ad-cta"
+               href="https://t.aslr1.com/420325/9986/0?target=widgets&amp;aff_sub5=SF_006OG000004lmDN&amp;aff_sub4=AT_0018"
+               target="_blank"
+               rel="noopener noreferrer">
+                CHAT NOW
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         AI 18+ PUSH WIDGET
+    ========================= -->
+
+    <script defer
+            src="https://crxcr2.com/cams-widget-ext/im_jerky?&amp;lang=en&amp;mode=prerecorded&amp;outlinkUrl=https://t.vlmai-5.com/420325/9403/0?target=pushnotifications&amp;aff_sub5=SF_006OG000004lmDN&amp;aff_sub4=AT_0018">
+    </script>
+
 
     <script>
 
 
         /* =====================================
-           SMARTLINK
+           LIVE CAM BANNER
         ===================================== */
 
-        const smartlinkURL =
-            "https://t.aslr1.com/420325/9986/0?target=widgets&aff_sub5=SF_006OG000004lmDN";
+        const liveCamBanners = [
+            "https://creative.whitetrafsa.com/widgets/wrapper?userId=4446e9cdcbea6b39b71ab962d6271fd264d81a79f30cb8dcd87f379c14140a3a&bb=90328def.png",
+            "https://creative.whitetrafsa.com/widgets/wrapper?userId=4446e9cdcbea6b39b71ab962d6271fd264d81a79f30cb8dcd87f379c14140a3a&bb=02de05e3.gif",
+            "https://creative.whitetrafsa.com/widgets/wrapper?userId=4446e9cdcbea6b39b71ab962d6271fd264d81a79f30cb8dcd87f379c14140a3a&bb=8470196f.gif"
+        ];
+
+        document.getElementById("livecam-banner-frame").src =
+            liveCamBanners[Math.floor(Math.random() * liveCamBanners.length)];
 
 
-        let smartlinkOpened = false;
+        /* =====================================
+           STAKE INTERSTITIAL
+        ===================================== */
 
+        const stakeInterstitial =
+            document.getElementById("stake-interstitial");
+
+        const stakeAdClose =
+            document.getElementById("stake-ad-close");
+
+
+        function showStakeInterstitial() {
+            stakeInterstitial.classList.add("show");
+            stakeInterstitial.setAttribute("aria-hidden", "false");
+        }
+
+
+        function closeStakeInterstitial() {
+            stakeInterstitial.classList.remove("show");
+            stakeInterstitial.setAttribute("aria-hidden", "true");
+        }
+
+
+        stakeAdClose.addEventListener("click", closeStakeInterstitial);
+
+
+        /* =====================================
+           DATING MID-ROLL - 30 GIÂY
+        ===================================== */
+
+        const DATING_MIDROLL_TIME = 30;
+
+        const datingMidroll =
+            document.getElementById("dating-midroll");
+
+        const datingAdClose =
+            document.getElementById("dating-ad-close");
+
+        const archiveVideo =
+            document.getElementById("archive-video");
+
+        let datingAdShown = false;
+
+
+        function showDatingMidroll() {
+            datingMidroll.classList.add("show");
+            datingMidroll.setAttribute("aria-hidden", "false");
+        }
+
+
+        function closeDatingMidroll() {
+            datingMidroll.classList.remove("show");
+            datingMidroll.setAttribute("aria-hidden", "true");
+        }
+
+
+        function resetDatingMidroll() {
+            datingAdShown = false;
+            closeDatingMidroll();
+        }
+
+
+        datingAdClose.addEventListener("click", closeDatingMidroll);
+
+
+        archiveVideo.addEventListener("timeupdate", function () {
+
+            if (
+                !datingAdShown &&
+                archiveVideo.currentTime >= DATING_MIDROLL_TIME
+            ) {
+
+                datingAdShown = true;
+                showDatingMidroll();
+
+            }
+
+        });
 
 
         /* =====================================
@@ -361,29 +659,22 @@
             titleText
         ) {
 
-
             const videoList =
-                document.getElementById(
-                    "video-list"
-                );
-
+                document.getElementById("video-list");
 
             const playerSection =
-                document.getElementById(
-                    "player-section"
-                );
-
+                document.getElementById("player-section");
 
             const pageTitle =
-                document.getElementById(
-                    "page-title"
-                );
-
+                document.getElementById("page-title");
 
             const video =
-                document.getElementById(
-                    "archive-video"
-                );
+                document.getElementById("archive-video");
+
+
+            /* Reset quảng cáo cho video mới */
+            resetDatingMidroll();
+            closeStakeInterstitial();
 
 
             /* ---------------------------------
@@ -391,9 +682,7 @@
             --------------------------------- */
 
             videoList.style.display = "none";
-
             playerSection.style.display = "block";
-
             pageTitle.innerText = titleText;
 
 
@@ -402,11 +691,8 @@
             --------------------------------- */
 
             video.pause();
-
             video.src = mp4Url;
-
             video.poster = posterUrl;
-
             video.load();
 
 
@@ -421,7 +707,7 @@
                4. PHÁT VIDEO
             --------------------------------- */
 
-            video.play().catch(function(error) {
+            video.play().catch(function (error) {
 
                 console.log(
                     "Autoplay bị trình duyệt chặn:",
@@ -432,66 +718,16 @@
 
 
             /* ---------------------------------
-               5. SMARTLINK
+               5. STAKE INTERSTITIAL
 
-               Chỉ mở 1 lần trong phiên.
+               Không tự mở tab.
+               Chỉ mở Stake khi người dùng
+               chủ động bấm nút CTA.
             --------------------------------- */
 
-            if (!smartlinkOpened) {
-
-                /*
-                 * Mở trực tiếp từ thao tác của
-                 * người dùng.
-                 */
-
-                let smartWindow = null;
-
-
-                try {
-
-                    smartWindow =
-                        window.open(
-                            smartlinkURL,
-                            "_blank"
-                        );
-
-                } catch (error) {
-
-                    console.log(
-                        "Smartlink error:",
-                        error
-                    );
-
-                }
-
-
-                if (smartWindow) {
-
-                    smartlinkOpened = true;
-
-
-                    /*
-                     * Cố gắng trả focus về trang
-                     * phim.
-                     *
-                     * Mobile browser có thể bỏ qua
-                     * lệnh này.
-                     */
-
-                    setTimeout(function() {
-
-                        try {
-                            window.focus();
-                        } catch (e) {}
-
-                    }, 50);
-
-                }
-
-            }
+            showStakeInterstitial();
 
         }
-
 
 
         /* =====================================
@@ -523,6 +759,12 @@
                 document.getElementById(
                     "page-title"
                 );
+
+
+            /* Đóng quảng cáo / reset trạng thái */
+
+            closeStakeInterstitial();
+            resetDatingMidroll();
 
 
             /* Dừng video */

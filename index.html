@@ -4,200 +4,1244 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Asian Dancer - Hot Videos</title>
+
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#121212;color:#fff;font-family:Arial,sans-serif}
-body{padding:10px}
-h1{text-align:center;color:#ff4757;font-size:21px;margin:8px 0 16px;line-height:1.3}
-.grid-container{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;max-width:700px;margin:0 auto}
-.card{background:#1e1e1e;border-radius:8px;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
-.card:active{transform:scale(.985)}
-.card img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
-.card-content{padding:10px}
-.card-title{font-size:15px;line-height:1.3;font-weight:bold}
-.card-sub{margin-top:5px;font-size:12px;color:#aaa}
-#player-section{display:none;width:100%;max-width:900px;margin:0 auto}
-.back-btn{display:block;width:100%;background:#ff4757;color:#fff;border:0;border-radius:6px;padding:12px;margin-bottom:10px;font-size:15px;font-weight:bold;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.back-btn:active{opacity:.8}
-.video-responsive{width:100%;background:#000;border-radius:7px;overflow:hidden}
-.video-responsive video{display:block;width:100%;height:auto;max-height:80vh;background:#000}
-.episode-selector{display:none;width:100%;margin-top:10px;gap:8px}
-.episode-btn{flex:1;padding:11px 10px;border:0;border-radius:6px;background:#2a2a2a;color:#aaa;font-size:14px;font-weight:bold;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.episode-btn.active{background:#ff4757;color:#fff}
-.episode-btn:active{transform:scale(.98)}
-.dating-banner{width:100%;max-width:300px;height:100px;margin:0 auto 14px;display:flex;justify-content:center;align-items:center}
-.dating-banner a,.dating-banner img{display:block;width:300px;height:100px}
-.dating-banner img{border:0;object-fit:cover}
-#ai-push-notification{position:fixed;left:auto;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:100000;width:min(360px,calc(100vw - 24px));display:none;background:#fff;color:#171717;border-radius:16px;box-shadow:0 6px 24px rgba(0,0,0,.35);border:1px solid rgba(0,0,0,.12);overflow:hidden;-webkit-tap-highlight-color:transparent}
-#ai-push-notification.show{display:block}
-.ai-push-message{display:flex;align-items:flex-start;gap:10px;padding:12px 42px 12px 12px;min-height:76px;cursor:pointer}
-.ai-push-avatar{flex:0 0 44px;width:44px;height:44px;min-width:44px;min-height:44px;border-radius:50%;overflow:hidden;background:#f3f3f3}
-.ai-push-avatar img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
-.ai-push-content{min-width:0;padding-top:1px}
-.ai-push-header{display:flex;align-items:center;gap:6px;margin-bottom:3px}
-.ai-push-title{font-size:13px;font-weight:700;color:#222}
-.ai-push-time{font-size:11px;color:#999}
-.ai-push-text{font-size:14px;line-height:1.35;font-weight:600;color:#333}
-.ai-push-close{position:absolute;top:5px;right:6px;width:34px;height:34px;border:0;border-radius:50%;background:transparent;color:#777;font-size:22px;line-height:34px;cursor:pointer;z-index:2}
-.ai-push-close:active{background:#eee}
-.ad-modal{position:fixed;inset:0;z-index:99990;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.78)}
-.ad-modal.show{display:flex}
-.ad-box{position:relative;width:min(92vw,420px);max-height:90vh;overflow:hidden;background:#000;border-radius:12px;padding:0;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.55);line-height:0}
-.ad-close{position:absolute;top:7px;right:7px;width:44px;height:44px;border:0;border-radius:50%;background:#333;color:#fff;font-size:26px;line-height:44px;padding:0;cursor:pointer;z-index:2}
-.stake-image-link{display:block;width:100%;margin:0;padding:0;text-decoration:none;line-height:0;overflow:hidden}
-.stake-ad-image{display:block;width:100%;height:auto;max-height:90vh;margin:0;padding:0;object-fit:contain;border-radius:0;vertical-align:top}
-@media(max-width:480px){
- #ai-push-notification{right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));width:calc(100vw - 20px)}
- .ai-push-message{min-height:72px;padding:11px 40px 11px 11px}
- .ai-push-avatar{flex:0 0 42px;min-width:42px;min-height:42px;width:42px;height:42px}
- .ai-push-text{font-size:13.5px}
+
+html,body{
+    margin:0;
+    padding:0;
+    background:#121212;
+    color:#fff;
+    font-family:Arial,sans-serif
 }
+
+body{
+    padding:10px
+}
+
+h1{
+    text-align:center;
+    color:#ff4757;
+    font-size:21px;
+    margin:8px 0 16px;
+    line-height:1.3
+}
+
+/* =========================
+   MOVIE GRID
+========================= */
+
+.grid-container{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    width:100%;
+    max-width:700px;
+    margin:0 auto
+}
+
+.card{
+    background:#1e1e1e;
+    border-radius:8px;
+    overflow:hidden;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+    user-select:none
+}
+
+.card:active{
+    transform:scale(.985)
+}
+
+.card img{
+    display:block;
+    width:100%;
+    height:auto;
+    aspect-ratio:16/9;
+    object-fit:cover
+}
+
+.card-content{
+    padding:10px
+}
+
+.card-title{
+    font-size:15px;
+    line-height:1.3;
+    font-weight:bold
+}
+
+.card-sub{
+    margin-top:5px;
+    font-size:12px;
+    color:#aaa
+}
+
+/* =========================
+   PLAYER
+========================= */
+
+#player-section{
+    display:none;
+    width:100%;
+    max-width:900px;
+    margin:0 auto
+}
+
+.back-btn{
+    display:block;
+    width:100%;
+    background:#ff4757;
+    color:#fff;
+    border:0;
+    border-radius:6px;
+    padding:12px;
+    margin-bottom:10px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent
+}
+
+.back-btn:active{
+    opacity:.8
+}
+
+.video-responsive{
+    width:100%;
+    background:#000;
+    border-radius:7px;
+    overflow:hidden
+}
+
+.video-responsive video{
+    display:block;
+    width:100%;
+    height:auto;
+    max-height:80vh;
+    background:#000
+}
+
+/* =========================
+   EPISODES
+========================= */
+
+.episode-selector{
+    display:none;
+    width:100%;
+    margin-top:10px;
+    gap:8px;
+    flex-wrap:wrap
+}
+
+.episode-btn{
+    flex:1 1 calc(50% - 4px);
+    min-width:120px;
+    padding:11px 10px;
+    border:0;
+    border-radius:6px;
+    background:#2a2a2a;
+    color:#aaa;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent
+}
+
+.episode-btn.active{
+    background:#ff4757;
+    color:#fff
+}
+
+.episode-btn:active{
+    transform:scale(.98)
+}
+
+/* =========================
+   DATING BANNER
+========================= */
+
+.dating-banner{
+    width:100%;
+    max-width:300px;
+    height:100px;
+    margin:0 auto 14px;
+    display:flex;
+    justify-content:center;
+    align-items:center
+}
+
+.dating-banner a,
+.dating-banner img{
+    display:block;
+    width:300px;
+    height:100px
+}
+
+.dating-banner img{
+    border:0;
+    object-fit:cover
+}
+
+/* =========================
+   AI PUSH NOTIFICATION
+========================= */
+
+#ai-push-notification{
+    position:fixed;
+    left:auto;
+    right:12px;
+    bottom:calc(14px + env(safe-area-inset-bottom,0px));
+    z-index:100000;
+    width:min(360px,calc(100vw - 24px));
+    display:none;
+    background:#fff;
+    color:#171717;
+    border-radius:16px;
+    box-shadow:0 6px 24px rgba(0,0,0,.35);
+    border:1px solid rgba(0,0,0,.12);
+    overflow:hidden;
+    -webkit-tap-highlight-color:transparent
+}
+
+#ai-push-notification.show{
+    display:block
+}
+
+.ai-push-message{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:12px 42px 12px 12px;
+    min-height:76px;
+    cursor:pointer
+}
+
+.ai-push-avatar{
+    flex:0 0 44px;
+    width:44px;
+    height:44px;
+    min-width:44px;
+    min-height:44px;
+    border-radius:50%;
+    overflow:hidden;
+    background:#f3f3f3
+}
+
+.ai-push-avatar img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%
+}
+
+.ai-push-content{
+    min-width:0;
+    padding-top:1px
+}
+
+.ai-push-header{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:3px
+}
+
+.ai-push-title{
+    font-size:13px;
+    font-weight:700;
+    color:#222
+}
+
+.ai-push-time{
+    font-size:11px;
+    color:#999
+}
+
+.ai-push-text{
+    font-size:14px;
+    line-height:1.35;
+    font-weight:600;
+    color:#333
+}
+
+.ai-push-close{
+    position:absolute;
+    top:5px;
+    right:6px;
+    width:34px;
+    height:34px;
+    border:0;
+    border-radius:50%;
+    background:transparent;
+    color:#777;
+    font-size:22px;
+    line-height:34px;
+    cursor:pointer;
+    z-index:2
+}
+
+.ai-push-close:active{
+    background:#eee
+}
+
+/* =========================
+   STAKE INTERSTITIAL
+========================= */
+
+.ad-modal{
+    position:fixed;
+    inset:0;
+    z-index:99990;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    background:rgba(0,0,0,.78)
+}
+
+.ad-modal.show{
+    display:flex
+}
+
+.ad-box{
+    position:relative;
+    width:min(92vw,420px);
+    max-height:90vh;
+    overflow:hidden;
+    background:#000;
+    border-radius:12px;
+    padding:0;
+    text-align:center;
+    box-shadow:0 10px 40px rgba(0,0,0,.55);
+    line-height:0
+}
+
+.ad-close{
+    position:absolute;
+    top:7px;
+    right:7px;
+    width:44px;
+    height:44px;
+    border:0;
+    border-radius:50%;
+    background:#333;
+    color:#fff;
+    font-size:26px;
+    line-height:44px;
+    padding:0;
+    cursor:pointer;
+    z-index:2
+}
+
+.stake-image-link{
+    display:block;
+    width:100%;
+    margin:0;
+    padding:0;
+    text-decoration:none;
+    line-height:0;
+    overflow:hidden
+}
+
+.stake-ad-image{
+    display:block;
+    width:100%;
+    height:auto;
+    max-height:90vh;
+    margin:0;
+    padding:0;
+    object-fit:contain;
+    border-radius:0;
+    vertical-align:top
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:480px){
+
+    #ai-push-notification{
+        right:10px;
+        bottom:calc(10px + env(safe-area-inset-bottom,0px));
+        width:calc(100vw - 20px)
+    }
+
+    .ai-push-message{
+        min-height:72px;
+        padding:11px 40px 11px 11px
+    }
+
+    .ai-push-avatar{
+        flex:0 0 42px;
+        min-width:42px;
+        min-height:42px;
+        width:42px;
+        height:42px
+    }
+
+    .ai-push-text{
+        font-size:13.5px
+    }
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
 @media(min-width:700px){
- body{padding:15px}
- .grid-container{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
- h1{font-size:24px}
- .card img{height:180px;aspect-ratio:auto}
- .card-content{padding:12px}
- .card-title{font-size:16px}
- .card-sub{font-size:13px}
+
+    body{
+        padding:15px
+    }
+
+    .grid-container{
+        grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+        gap:12px
+    }
+
+    h1{
+        font-size:24px
+    }
+
+    .card img{
+        height:180px;
+        aspect-ratio:auto
+    }
+
+    .card-content{
+        padding:12px
+    }
+
+    .card-title{
+        font-size:16px
+    }
+
+    .card-sub{
+        font-size:13px
+    }
 }
 </style>
 </head>
+
 <body>
+
 <h1 id="page-title">Asian Dancer Exclusive</h1>
 
+
+<!-- =========================
+     DATING BANNER
+========================= -->
+
 <div class="dating-banner" aria-label="Dating offer">
-<a id="dating-banner-link" href="https://t.datsk3.com/420325/9986/0?target=banners&amp;file_id=628702&amp;aff_sub5=SF_006OG000004lmDN&amp;aff_sub4=AT_0002" target="_blank" rel="noopener noreferrer">
-<img id="dating-banner-image" src="https://www.imglnky.com/9986/010770D_GDAT_18_ALL_EN_64_L.gif.gif" width="300" height="100" alt="Dating offer" border="0">
-</a>
+
+    <a
+        id="dating-banner-link"
+        href="https://t.datsk3.com/420325/9986/0?target=banners&amp;file_id=628702&amp;aff_sub5=SF_006OG000004lmDN&amp;aff_sub4=AT_0002"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        <img
+            id="dating-banner-image"
+            src="https://www.imglnky.com/9986/010770D_GDAT_18_ALL_EN_64_L.gif.gif"
+            width="300"
+            height="100"
+            alt="Dating offer"
+            border="0"
+        >
+    </a>
+
 </div>
 
-<div class="grid-container" id="video-list">
-<div class="card" onclick="openVideoAndSmartlink('https://archive.org/download/1003-1_202610/1003%281%29.mp4','1003.jpg','Promiscuous Fiancee')">
-<img src="1003.jpg" alt="Promiscuous Fiancee"><div class="card-content"><div class="card-title">Promiscuous Fiancee</div><div class="card-sub">Full HD</div></div>
-</div>
-<div class="card" onclick="openVideoAndSmartlink('https://archive.org/download/1004_20261004/1004.mp4','1004.jpg','Stranded on a Desert Island with 4 Sexy Girls')">
-<img src="1004.jpg" alt="Stranded on a Desert Island with 4 Sexy Girls"><div class="card-content"><div class="card-title">Stranded on a Desert Island with 4 Sexy Girls</div><div class="card-sub">Full HD</div></div>
-</div>
-<div class="card" onclick="openVideoAndSmartlink('https://archive.org/download/1003-1_202610/1003%281%29.mp4','1003.jpg','Bộ sưu tập Tập 3: Backstage Moments')">
-<img src="1003.jpg" alt="Backstage Moments"><div class="card-content"><div class="card-title">Bộ sưu tập Tập 3: Backstage Moments</div><div class="card-sub">Xem ngay bản Full HD</div></div>
-</div>
-</div>
+
+<!-- =========================
+     MOVIE LIST
+     JS SẼ TỰ TẠO CARD Ở ĐÂY
+========================= -->
+
+<div
+    class="grid-container"
+    id="video-list"
+></div>
+
+
+<!-- =========================
+     VIDEO PLAYER
+========================= -->
 
 <div id="player-section">
-<button class="back-btn" onclick="goBack()">⬅ Back</button>
-<div class="video-responsive"><video id="archive-video" controls playsinline webkit-playsinline preload="metadata">Trình duyệt của bạn không hỗ trợ thẻ video.</video></div>
-<div id="episode-selector" class="episode-selector">
-<button id="episode-1-btn" class="episode-btn active" onclick="switchEpisode(1)">Tập 1</button>
-<button id="episode-2-btn" class="episode-btn" onclick="switchEpisode(2)">Tập 2</button>
-</div>
+
+    <button
+        class="back-btn"
+        onclick="goBack()"
+    >
+        ⬅ Back
+    </button>
+
+    <div class="video-responsive">
+
+        <video
+            id="archive-video"
+            controls
+            playsinline
+            webkit-playsinline
+            preload="metadata"
+        >
+            Trình duyệt của bạn không hỗ trợ thẻ video.
+        </video>
+
+    </div>
+
+    <div
+        id="episode-selector"
+        class="episode-selector"
+    ></div>
+
 </div>
 
-<div id="stake-interstitial" class="ad-modal" aria-hidden="true">
-<div class="ad-box" role="dialog" aria-modal="true" aria-label="Sponsored offer">
-<button id="stake-ad-close" class="ad-close" type="button" aria-label="Close">×</button>
-<a class="stake-image-link" href="https://playrainbet.com/t5mpuknem" target="_blank" rel="noopener noreferrer" aria-label="Open Stake offer">
-<img src="stake-ad.jpg" alt="Stake promotional offer - promo code DANCERCLUB" class="stake-ad-image">
-</a>
-</div>
+
+<!-- =========================
+     STAKE INTERSTITIAL
+========================= -->
+
+<div
+    id="stake-interstitial"
+    class="ad-modal"
+    aria-hidden="true"
+>
+
+    <div
+        class="ad-box"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Sponsored offer"
+    >
+
+        <button
+            id="stake-ad-close"
+            class="ad-close"
+            type="button"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+        <a
+            class="stake-image-link"
+            href="https://playrainbet.com/t5mpuknem"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Stake offer"
+        >
+
+            <img
+                src="stake-ad.jpg"
+                alt="Stake promotional offer - promo code DANCERCLUB"
+                class="stake-ad-image"
+            >
+
+        </a>
+
+    </div>
+
 </div>
 
-<div id="ai-push-notification" aria-label="AI girlfriend message">
-<button class="ai-push-close" id="ai-push-close" type="button" aria-label="Close">&times;</button>
-<div class="ai-push-message" id="ai-push-message">
-<div class="ai-push-avatar"><img src="ai-avatar.jpg" alt="AI Girlfriend"></div>
-<div class="ai-push-content"><div class="ai-push-header"><div class="ai-push-title">AI Girlfriend</div><div class="ai-push-time">now</div></div>
-<div class="ai-push-text">Create a sexy AI girlfriend and do whatever you want with her</div></div>
+
+<!-- =========================
+     AI PUSH NOTIFICATION
+========================= -->
+
+<div
+    id="ai-push-notification"
+    aria-label="AI girlfriend message"
+>
+
+    <button
+        class="ai-push-close"
+        id="ai-push-close"
+        type="button"
+        aria-label="Close"
+    >
+        &times;
+    </button>
+
+    <div
+        class="ai-push-message"
+        id="ai-push-message"
+    >
+
+        <div class="ai-push-avatar">
+            <img
+                src="ai-avatar.jpg"
+                alt="AI Girlfriend"
+            >
+        </div>
+
+        <div class="ai-push-content">
+
+            <div class="ai-push-header">
+
+                <div class="ai-push-title">
+                    AI Girlfriend
+                </div>
+
+                <div class="ai-push-time">
+                    now
+                </div>
+
+            </div>
+
+            <div class="ai-push-text">
+                Create a sexy AI girlfriend and do whatever you want with her
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-</div>
+
 
 <script>
-const datingBannerCreatives=[
-{image:"https://www.imglnky.com/9986/010770D_GDAT_18_ALL_EN_64_L.gif.gif",link:"https://t.datsk3.com/420325/9986/0?target=banners&file_id=628702&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0002"},
-{image:"https://www.imglnky.com/9986/012060A_GDAT_18_ALL_EN_64_L.gif.gif",link:"https://t.datsk3.com/420325/9986/0?target=banners&file_id=628702&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0002"},
-{image:"https://www.imglnky.com/9986/DAT-460_DESIGN-23859_2_300100.gif",link:"https://t.datsk3.com/420325/9986/0?target=banners&file_id=628702&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0002"}
+
+/* =========================================================
+   1. DANH SÁCH PHIM
+   =========================================================
+
+   SAU NÀY BẠN CHỈ CẦN SỬA KHU VỰC NÀY.
+
+   - Thêm phim  → thêm 1 object vào MOVIES
+   - Thêm tập  → thêm 1 object vào episodes
+   - Không cần sửa HTML bên trên
+   - Không cần sửa các function bên dưới
+========================================================= */
+
+const MOVIES = [
+
+    {
+        title: "Promiscuous Fiancee",
+
+        poster: "1003.jpg",
+
+        subtitle: "Full HD",
+
+        episodes: [
+
+            {
+                title: "Tập 1",
+
+                url: "https://archive.org/download/1003-1_202610/1003%281%29.mp4",
+
+                poster: "1003.jpg"
+            }
+
+        ]
+    },
+
+
+    {
+        title: "Stranded on a Desert Island with 4 Sexy Girls",
+
+        poster: "1004.jpg",
+
+        subtitle: "Full HD",
+
+        episodes: [
+
+            {
+                title: "Tập 1",
+
+                url: "https://archive.org/download/1004_20261004/1004.mp4",
+
+                poster: "1004.jpg"
+            },
+
+            {
+                title: "Tập 2",
+
+                url: "https://archive.org/download/1004-ep-2/1004-ep2.mp4",
+
+                poster: "1004.jpg"
+            }
+
+        ]
+    },
+
+
+    {
+        title: "Bộ sưu tập Tập 3: Backstage Moments",
+
+        poster: "1003.jpg",
+
+        subtitle: "Xem ngay bản Full HD",
+
+        episodes: [
+
+            {
+                title: "Tập 1",
+
+                url: "https://archive.org/download/1003-1_202610/1003%281%29.mp4",
+
+                poster: "1003.jpg"
+            }
+
+        ]
+    }
+
 ];
-const selectedDatingBanner=datingBannerCreatives[Math.floor(Math.random()*datingBannerCreatives.length)];
-document.getElementById("dating-banner-image").src=selectedDatingBanner.image;
-document.getElementById("dating-banner-link").href=selectedDatingBanner.link;
 
-const AI_PUSH_URL="https://t.vlmai-5.com/420325/9403/0?target=pushnotifications&aff_sub5=SF_006OG000004lmDN";
-const aiPushNotification=document.getElementById("ai-push-notification");
-const aiPushClose=document.getElementById("ai-push-close");
-const aiPushMessage=document.getElementById("ai-push-message");
-let aiPushClosed=false;
-function showAiPushNotification(){if(aiPushClosed)return;aiPushNotification.classList.add("show")}
-function closeAiPushNotification(event){if(event)event.stopPropagation();aiPushClosed=true;aiPushNotification.classList.remove("show")}
-function openAiPushOffer(){window.open(AI_PUSH_URL,"_blank","noopener,noreferrer")}
-aiPushMessage.addEventListener("click",openAiPushOffer);
-aiPushClose.addEventListener("click",closeAiPushNotification);
-setTimeout(showAiPushNotification,5000);
 
-const stakeInterstitial=document.getElementById("stake-interstitial");
-const stakeAdClose=document.getElementById("stake-ad-close");
-function showStakeInterstitial(){stakeInterstitial.classList.add("show");stakeInterstitial.setAttribute("aria-hidden","false")}
-function closeStakeInterstitial(){stakeInterstitial.classList.remove("show");stakeInterstitial.setAttribute("aria-hidden","true")}
-stakeAdClose.addEventListener("click",closeStakeInterstitial);
+/* =========================================================
+   2. DATING BANNER RANDOM
+========================================================= */
 
-const EPISODES={
-1:{url:"https://archive.org/download/1004_20261004/1004.mp4",poster:"1004.jpg"},
-2:{url:"https://archive.org/download/1004-ep-2/1004-ep2.mp4",poster:"1004.jpg"}
-};
+const datingBannerCreatives = [
 
-function switchEpisode(episodeNumber){
-const episode=EPISODES[episodeNumber];
-const video=document.getElementById("archive-video");
-if(!episode)return;
-video.pause();
-video.src=episode.url;
-video.poster=episode.poster;
-video.load();
-video.play().catch(function(error){console.log("Autoplay bị trình duyệt chặn:",error)});
-document.getElementById("episode-1-btn").classList.toggle("active",episodeNumber===1);
-document.getElementById("episode-2-btn").classList.toggle("active",episodeNumber===2);
+    {
+        image: "https://www.imglnky.com/9986/010770D_GDAT_18_ALL_EN_64_L.gif.gif",
+
+        link: "https://t.datsk3.com/420325/9986/0?target=banners&file_id=628702&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0002"
+    },
+
+    {
+        image: "https://www.imglnky.com/9986/012060A_GDAT_18_ALL_EN_64_L.gif.gif",
+
+        link: "https://t.datsk3.com/420325/9986/0?target=banners&file_id=628702&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0002"
+    },
+
+    {
+        image: "https://www.imglnky.com/9986/DAT-460_DESIGN-23859_2_300100.gif",
+
+        link: "https://t.datsk3.com/420325/9986/0?target=banners&file_id=628702&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0002"
+    }
+
+];
+
+
+const selectedDatingBanner =
+    datingBannerCreatives[
+        Math.floor(
+            Math.random() * datingBannerCreatives.length
+        )
+    ];
+
+
+document.getElementById("dating-banner-image").src =
+    selectedDatingBanner.image;
+
+
+document.getElementById("dating-banner-link").href =
+    selectedDatingBanner.link;
+
+
+/* =========================================================
+   3. RENDER MOVIE CARDS
+========================================================= */
+
+function renderMovies(){
+
+    const videoList =
+        document.getElementById("video-list");
+
+    videoList.innerHTML = "";
+
+    MOVIES.forEach(function(movie, index){
+
+        const card =
+            document.createElement("div");
+
+        card.className = "card";
+
+        card.addEventListener(
+            "click",
+            function(){
+                openMovie(index);
+            }
+        );
+
+
+        const image =
+            document.createElement("img");
+
+        image.src = movie.poster;
+
+        image.alt = movie.title;
+
+
+        const content =
+            document.createElement("div");
+
+        content.className = "card-content";
+
+
+        const title =
+            document.createElement("div");
+
+        title.className = "card-title";
+
+        title.textContent = movie.title;
+
+
+        const subtitle =
+            document.createElement("div");
+
+        subtitle.className = "card-sub";
+
+        subtitle.textContent =
+            movie.subtitle || "Full HD";
+
+
+        content.appendChild(title);
+
+        content.appendChild(subtitle);
+
+        card.appendChild(image);
+
+        card.appendChild(content);
+
+        videoList.appendChild(card);
+
+    });
+
 }
 
-function openVideoAndSmartlink(mp4Url,posterUrl,titleText){
-const videoList=document.getElementById("video-list");
-const playerSection=document.getElementById("player-section");
-const pageTitle=document.getElementById("page-title");
-const video=document.getElementById("archive-video");
-const episodeSelector=document.getElementById("episode-selector");
-closeStakeInterstitial();
-videoList.style.display="none";
-playerSection.style.display="block";
-pageTitle.innerText=titleText;
-if(titleText==="Stranded on a Desert Island with 4 Sexy Girls"){
-episodeSelector.style.display="flex";
-document.getElementById("episode-1-btn").classList.add("active");
-document.getElementById("episode-2-btn").classList.remove("active");
-}else{episodeSelector.style.display="none"}
-video.pause();
-video.src=mp4Url;
-video.poster=posterUrl;
-video.load();
-window.scrollTo(0,0);
-video.play().catch(function(error){console.log("Autoplay bị trình duyệt chặn:",error)});
-showStakeInterstitial();
+
+/* =========================================================
+   4. PLAYER STATE
+========================================================= */
+
+let currentMovieIndex = -1;
+
+let currentEpisodeIndex = 0;
+
+
+/* =========================================================
+   5. OPEN MOVIE
+========================================================= */
+
+function openMovie(movieIndex){
+
+    const movie =
+        MOVIES[movieIndex];
+
+    if(!movie || !movie.episodes || !movie.episodes.length){
+        return;
+    }
+
+
+    currentMovieIndex = movieIndex;
+
+    currentEpisodeIndex = 0;
+
+
+    const videoList =
+        document.getElementById("video-list");
+
+    const playerSection =
+        document.getElementById("player-section");
+
+    const pageTitle =
+        document.getElementById("page-title");
+
+    const episodeSelector =
+        document.getElementById("episode-selector");
+
+
+    closeStakeInterstitial();
+
+
+    videoList.style.display = "none";
+
+    playerSection.style.display = "block";
+
+
+    pageTitle.innerText =
+        movie.title;
+
+
+    renderEpisodes(movie);
+
+
+    if(movie.episodes.length > 1){
+
+        episodeSelector.style.display = "flex";
+
+    }else{
+
+        episodeSelector.style.display = "none";
+
+    }
+
+
+    loadEpisode(0);
+
+
+    window.scrollTo(0,0);
+
+
+    showStakeInterstitial();
+
 }
+
+
+/* =========================================================
+   6. RENDER EPISODE BUTTONS
+========================================================= */
+
+function renderEpisodes(movie){
+
+    const selector =
+        document.getElementById("episode-selector");
+
+    selector.innerHTML = "";
+
+
+    movie.episodes.forEach(
+        function(episode,index){
+
+            const button =
+                document.createElement("button");
+
+
+            button.className =
+                "episode-btn";
+
+
+            button.textContent =
+                episode.title || ("Tập " + (index + 1));
+
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    switchEpisode(index);
+
+                }
+            );
+
+
+            selector.appendChild(button);
+
+        }
+    );
+
+
+    updateEpisodeButtons();
+
+}
+
+
+/* =========================================================
+   7. LOAD EPISODE
+========================================================= */
+
+function loadEpisode(episodeIndex){
+
+    const movie =
+        MOVIES[currentMovieIndex];
+
+    if(!movie){
+        return;
+    }
+
+
+    const episode =
+        movie.episodes[episodeIndex];
+
+    if(!episode){
+        return;
+    }
+
+
+    currentEpisodeIndex =
+        episodeIndex;
+
+
+    const video =
+        document.getElementById("archive-video");
+
+
+    video.pause();
+
+
+    video.src =
+        episode.url;
+
+
+    video.poster =
+        episode.poster || movie.poster;
+
+
+    video.load();
+
+
+    video.play().catch(
+        function(error){
+
+            console.log(
+                "Autoplay bị trình duyệt chặn:",
+                error
+            );
+
+        }
+    );
+
+
+    updateEpisodeButtons();
+
+}
+
+
+/* =========================================================
+   8. SWITCH EPISODE
+========================================================= */
+
+function switchEpisode(episodeIndex){
+
+    const movie =
+        MOVIES[currentMovieIndex];
+
+    if(!movie){
+        return;
+    }
+
+
+    if(
+        episodeIndex < 0 ||
+        episodeIndex >= movie.episodes.length
+    ){
+        return;
+    }
+
+
+    loadEpisode(episodeIndex);
+
+}
+
+
+/* =========================================================
+   9. UPDATE ACTIVE EPISODE BUTTON
+========================================================= */
+
+function updateEpisodeButtons(){
+
+    const buttons =
+        document.querySelectorAll(
+            "#episode-selector .episode-btn"
+        );
+
+
+    buttons.forEach(
+        function(button,index){
+
+            button.classList.toggle(
+                "active",
+                index === currentEpisodeIndex
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   10. BACK TO MOVIE LIST
+========================================================= */
 
 function goBack(){
-const video=document.getElementById("archive-video");
-const videoList=document.getElementById("video-list");
-const playerSection=document.getElementById("player-section");
-const pageTitle=document.getElementById("page-title");
-const episodeSelector=document.getElementById("episode-selector");
-closeStakeInterstitial();
-video.pause();
-video.removeAttribute("src");
-video.removeAttribute("poster");
-video.load();
-episodeSelector.style.display="none";
-playerSection.style.display="none";
-videoList.style.display="grid";
-pageTitle.innerText="Asian Dancer Exclusive";
-window.scrollTo(0,0);
+
+    const video =
+        document.getElementById("archive-video");
+
+    const videoList =
+        document.getElementById("video-list");
+
+    const playerSection =
+        document.getElementById("player-section");
+
+    const pageTitle =
+        document.getElementById("page-title");
+
+    const episodeSelector =
+        document.getElementById("episode-selector");
+
+
+    closeStakeInterstitial();
+
+
+    video.pause();
+
+    video.removeAttribute("src");
+
+    video.removeAttribute("poster");
+
+    video.load();
+
+
+    episodeSelector.style.display = "none";
+
+    episodeSelector.innerHTML = "";
+
+
+    playerSection.style.display = "none";
+
+    videoList.style.display = "grid";
+
+
+    pageTitle.innerText =
+        "Asian Dancer Exclusive";
+
+
+    currentMovieIndex = -1;
+
+    currentEpisodeIndex = 0;
+
+
+    window.scrollTo(0,0);
+
 }
+
+
+/* =========================================================
+   11. STAKE INTERSTITIAL
+========================================================= */
+
+const stakeInterstitial =
+    document.getElementById(
+        "stake-interstitial"
+    );
+
+
+const stakeAdClose =
+    document.getElementById(
+        "stake-ad-close"
+    );
+
+
+function showStakeInterstitial(){
+
+    stakeInterstitial.classList.add("show");
+
+    stakeInterstitial.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+}
+
+
+function closeStakeInterstitial(){
+
+    stakeInterstitial.classList.remove("show");
+
+    stakeInterstitial.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+}
+
+
+stakeAdClose.addEventListener(
+    "click",
+    closeStakeInterstitial
+);
+
+
+/* =========================================================
+   12. AI PUSH NOTIFICATION
+========================================================= */
+
+const AI_PUSH_URL =
+    "https://t.vlmai-5.com/420325/9403/0?target=pushnotifications&aff_sub5=SF_006OG000004lmDN";
+
+
+const aiPushNotification =
+    document.getElementById(
+        "ai-push-notification"
+    );
+
+
+const aiPushClose =
+    document.getElementById(
+        "ai-push-close"
+    );
+
+
+const aiPushMessage =
+    document.getElementById(
+        "ai-push-message"
+    );
+
+
+let aiPushClosed = false;
+
+
+function showAiPushNotification(){
+
+    if(aiPushClosed){
+        return;
+    }
+
+    aiPushNotification.classList.add("show");
+
+}
+
+
+function closeAiPushNotification(event){
+
+    if(event){
+        event.stopPropagation();
+    }
+
+    aiPushClosed = true;
+
+    aiPushNotification.classList.remove("show");
+
+}
+
+
+function openAiPushOffer(){
+
+    window.open(
+        AI_PUSH_URL,
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+}
+
+
+aiPushMessage.addEventListener(
+    "click",
+    openAiPushOffer
+);
+
+
+aiPushClose.addEventListener(
+    "click",
+    closeAiPushNotification
+);
+
+
+setTimeout(
+    showAiPushNotification,
+    5000
+);
+
+
+/* =========================================================
+   13. KHỞI TẠO TRANG
+========================================================= */
+
+renderMovies();
+
 </script>
+
 </body>
 </html>

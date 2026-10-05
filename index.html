@@ -54,15 +54,39 @@ h1{
     transform:scale(.985)
 }
 
-.card img{
+.thumbnail-wrap{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    background:#181818
+}
+
+.thumbnail-bg{
+    position:absolute;
+    inset:-18px;
+    width:calc(100% + 36px);
+    height:calc(100% + 36px);
+    object-fit:cover;
+    object-position:center;
+    filter:blur(14px);
+    transform:scale(1.08);
+    opacity:.55
+}
+
+.thumbnail-main{
+    position:relative;
+    z-index:1;
     display:block;
     width:100%;
-    height:auto;
-    object-fit:contain
+    height:100%;
+    object-fit:contain;
+    object-position:center
 }
 
 .card-content{
-    padding:10px
+    padding:10px;
+    min-height:68px
 }
 
 .card-title{
@@ -406,15 +430,13 @@ h1{
         font-size:24px
     }
 
-    .card img{
-        width:100%;
-        height:auto;
-        aspect-ratio:auto;
-        object-fit:contain
+    .thumbnail-wrap{
+        aspect-ratio:16/9
     }
 
     .card-content{
-        padding:12px
+        padding:12px;
+        min-height:72px
     }
 
     .card-title{
@@ -794,12 +816,30 @@ function renderMovies(){
         );
 
 
+        const thumbnailWrap =
+            document.createElement("div");
+
+        thumbnailWrap.className = "thumbnail-wrap";
+
+
+        const thumbnailBg =
+            document.createElement("img");
+
+        thumbnailBg.className = "thumbnail-bg";
+        thumbnailBg.src = movie.poster;
+        thumbnailBg.alt = "";
+
+
         const image =
             document.createElement("img");
 
+        image.className = "thumbnail-main";
         image.src = movie.poster;
-
         image.alt = movie.title;
+
+
+        thumbnailWrap.appendChild(thumbnailBg);
+        thumbnailWrap.appendChild(image);
 
 
         const content =
@@ -829,7 +869,7 @@ function renderMovies(){
 
         content.appendChild(subtitle);
 
-        card.appendChild(image);
+        card.appendChild(thumbnailWrap);
 
         card.appendChild(content);
 

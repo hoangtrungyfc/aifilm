@@ -381,6 +381,133 @@ h1{
     vertical-align:top
 }
 
+
+/* =========================
+   PAGINATION
+========================= */
+
+.pagination{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+    width:100%;
+    max-width:700px;
+    margin:18px auto 28px;
+}
+
+.page-btn{
+    min-width:42px;
+    height:42px;
+    padding:0 12px;
+    border:0;
+    border-radius:8px;
+    background:#2a2a2a;
+    color:#aaa;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+}
+
+.page-btn.active{
+    background:#ff4757;
+    color:#fff;
+}
+
+.page-btn:active{
+    transform:scale(.97);
+}
+
+/* =========================
+   SITE FOOTER
+========================= */
+
+.site-footer{
+    width:100%;
+    margin:48px auto 0;
+    padding:52px 20px 34px;
+    background:#121212;
+    border-top:1px solid #2a2a2a;
+    text-align:center;
+}
+
+.footer-logo{
+    margin-bottom:28px;
+    font-size:52px;
+    line-height:1;
+    font-weight:800;
+    letter-spacing:-3px;
+}
+
+.footer-links{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:22px 28px;
+    max-width:700px;
+    margin:0 auto 24px;
+}
+
+.footer-links a{
+    color:#fff;
+    text-decoration:none;
+    font-size:16px;
+}
+
+.footer-links a:hover{
+    text-decoration:underline;
+}
+
+.footer-description{
+    max-width:720px;
+    margin:0 auto;
+    color:#777;
+    font-size:15px;
+    line-height:1.9;
+}
+
+.footer-description + .footer-description{
+    margin-top:8px;
+}
+
+@media(max-width:480px){
+    .pagination{
+        margin-top:16px;
+        margin-bottom:24px;
+    }
+
+    .page-btn{
+        min-width:40px;
+        height:40px;
+        font-size:14px;
+    }
+
+    .site-footer{
+        margin-top:36px;
+        padding:42px 18px 30px;
+    }
+
+    .footer-logo{
+        font-size:46px;
+    }
+
+    .footer-links{
+        gap:18px 24px;
+    }
+
+    .footer-links a{
+        font-size:15px;
+    }
+
+    .footer-description{
+        font-size:14px;
+        line-height:1.8;
+    }
+}
+
 /* =========================
    MOBILE
 ========================= */
@@ -490,6 +617,12 @@ h1{
     id="video-list"
 ></div>
 
+<div
+    id="pagination"
+    class="pagination"
+    aria-label="Movie pages"
+></div>
+
 
 <!-- =========================
      VIDEO PLAYER
@@ -513,7 +646,7 @@ h1{
             webkit-playsinline
             preload="metadata"
         >
-            Trình duyệt của bạn không hỗ trợ thẻ video.
+            Your browser does not support HTML5 video.
         </video>
 
     </div>
@@ -628,6 +761,38 @@ h1{
 </div>
 
 
+
+<!-- =========================
+     SITE FOOTER
+========================= -->
+
+<footer class="site-footer">
+
+    <div class="footer-logo" aria-label="Site name">
+        AICLIP.US
+    </div>
+
+    <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/">Home</a>
+        <a href="/register">Register</a>
+        <a href="/login">Login</a>
+        <a href="/rules">Rules &amp; Policies</a>
+        <a href="/contact">Contact / Feedback</a>
+        <a href="/dmca">Content Removal / DMCA</a>
+    </nav>
+
+    <p class="footer-description">
+        This website provides adult video content for adults only.
+        Please respect applicable laws and the rights of content owners.
+    </p>
+
+    <p class="footer-description">
+        Some content may be fictional or presented for entertainment purposes only.
+        Do not imitate unsafe or unlawful behavior.
+    </p>
+
+</footer>
+
 <script>
 
 /* =========================================================
@@ -654,7 +819,7 @@ const MOVIES = [
         episodes: [
 
             {
-                title: "Tập 1",
+                title: "Episode 1",
 
                 url: "https://archive.org/download/1008_20261005_20261005/1008.mp4",
 
@@ -675,7 +840,7 @@ const MOVIES = [
         episodes: [
 
             {
-                title: "Tập 1",
+                title: "Episode 1",
 
                 url: "https://archive.org/download/1007_20261005_202610/1007.mp4",
 
@@ -697,7 +862,7 @@ const MOVIES = [
         episodes: [
 
             {
-                title: "Tập 1",
+                title: "Episode 1",
 
                 url: "https://archive.org/download/1006_20261005/1006.mp4",
 
@@ -718,7 +883,7 @@ const MOVIES = [
         episodes: [
 
             {
-                title: "Tập 1",
+                title: "Episode 1",
 
                 url: "https://archive.org/download/1005_20261005/1005.mp4",
 
@@ -739,7 +904,7 @@ const MOVIES = [
         episodes: [
 
             {
-                title: "Tập 1",
+                title: "Episode 1",
 
                 url: "https://archive.org/download/1003-1_202610/1003%281%29.mp4",
 
@@ -760,7 +925,7 @@ const MOVIES = [
         episodes: [
 
             {
-                title: "Tập 1",
+                title: "Episode 1",
 
                 url: "https://archive.org/download/1004_20261004/1004.mp4",
 
@@ -768,7 +933,7 @@ const MOVIES = [
             },
 
             {
-                title: "Tập 2",
+                title: "Episode 2",
 
                 url: "https://archive.org/download/1004-ep-2/1004-ep2.mp4",
 
@@ -776,7 +941,7 @@ const MOVIES = [
             },
 
             {
-                title: "Tập 3",
+                title: "Episode 3",
 
                 url: "https://archive.org/download/1004-ep-3/1004-ep3.mp4",
 
@@ -797,7 +962,7 @@ const MOVIES = [
         episodes: [
 
             {
-                title: "Tập 1",
+                title: "Episode 1",
 
                 url: "https://archive.org/download/1003-1_202610/1003%281%29.mp4",
 
@@ -857,14 +1022,35 @@ document.getElementById("dating-banner-link").href =
    3. RENDER MOVIE CARDS
 ========================================================= */
 
+const MOVIES_PER_PAGE = 10;
+let currentPage = 1;
+
 function renderMovies(){
 
     const videoList =
         document.getElementById("video-list");
 
+    const pagination =
+        document.getElementById("pagination");
+
     videoList.innerHTML = "";
 
-    MOVIES.forEach(function(movie, index){
+    const totalPages =
+        Math.max(1, Math.ceil(MOVIES.length / MOVIES_PER_PAGE));
+
+    if(currentPage > totalPages){
+        currentPage = totalPages;
+    }
+
+    const startIndex =
+        (currentPage - 1) * MOVIES_PER_PAGE;
+
+    const endIndex =
+        Math.min(startIndex + MOVIES_PER_PAGE, MOVIES.length);
+
+    for(let index = startIndex; index < endIndex; index++){
+
+        const movie = MOVIES[index];
 
         const card =
             document.createElement("div");
@@ -878,12 +1064,10 @@ function renderMovies(){
             }
         );
 
-
         const thumbnailWrap =
             document.createElement("div");
 
         thumbnailWrap.className = "thumbnail-wrap";
-
 
         const thumbnailBg =
             document.createElement("img");
@@ -892,7 +1076,6 @@ function renderMovies(){
         thumbnailBg.src = movie.poster;
         thumbnailBg.alt = "";
 
-
         const image =
             document.createElement("img");
 
@@ -900,48 +1083,82 @@ function renderMovies(){
         image.src = movie.poster;
         image.alt = movie.title;
 
-
         thumbnailWrap.appendChild(thumbnailBg);
         thumbnailWrap.appendChild(image);
-
 
         const content =
             document.createElement("div");
 
         content.className = "card-content";
 
-
         const title =
             document.createElement("div");
 
         title.className = "card-title";
-
         title.textContent = movie.title;
-
 
         const subtitle =
             document.createElement("div");
 
         subtitle.className = "card-sub";
-
         subtitle.textContent =
             movie.subtitle || "Full HD";
 
-
         content.appendChild(title);
-
         content.appendChild(subtitle);
 
         card.appendChild(thumbnailWrap);
-
         card.appendChild(content);
 
         videoList.appendChild(card);
+    }
 
-    });
-
+    renderPagination(totalPages);
 }
 
+function renderPagination(totalPages){
+
+    const pagination =
+        document.getElementById("pagination");
+
+    pagination.innerHTML = "";
+
+    // Always show page 1, even when there is only one page.
+    for(let page = 1; page <= totalPages; page++){
+
+        const button =
+            document.createElement("button");
+
+        button.type = "button";
+        button.className = "page-btn";
+        button.textContent = page;
+        button.setAttribute(
+            "aria-label",
+            "Go to page " + page
+        );
+
+        if(page === currentPage){
+            button.classList.add("active");
+            button.setAttribute("aria-current", "page");
+        }
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                if(page === currentPage){
+                    return;
+                }
+
+                currentPage = page;
+                renderMovies();
+                window.scrollTo(0,0);
+            }
+        );
+
+        pagination.appendChild(button);
+    }
+}
 
 /* =========================================================
    4. PLAYER STATE
@@ -989,6 +1206,8 @@ function openMovie(movieIndex){
 
     videoList.style.display = "none";
 
+    document.getElementById("pagination").style.display = "none";
+
     playerSection.style.display = "block";
 
 
@@ -999,15 +1218,8 @@ function openMovie(movieIndex){
     renderEpisodes(movie);
 
 
-    if(movie.episodes.length > 1){
-
-        episodeSelector.style.display = "flex";
-
-    }else{
-
-        episodeSelector.style.display = "none";
-
-    }
+    // Always show the episode selector, including movies with one episode.
+    episodeSelector.style.display = "flex";
 
 
     loadEpisode(0);
@@ -1045,7 +1257,7 @@ function renderEpisodes(movie){
 
 
             button.textContent =
-                episode.title || ("Tập " + (index + 1));
+                episode.title || ("Episode " + (index + 1));
 
 
             button.addEventListener(
@@ -1228,7 +1440,7 @@ function goBack(){
 
 
     pageTitle.innerText =
-        "Asian Dancer Exclusive";
+        "AICLIP.US - AI Adult Videos";
 
 
     currentMovieIndex = -1;

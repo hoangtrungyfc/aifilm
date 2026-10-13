@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>AICLIP.UK - AI Adult Videos</title>
+<link href="https://vjs.zencdn.net/8.23.8/video-js.css" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box}
@@ -138,12 +139,15 @@ h1{
     overflow:hidden
 }
 
-.video-responsive video{
+.video-responsive .video-js{
     display:block;
     width:100%;
-    height:auto;
-    max-height:80vh;
+    max-width:100%;
+    aspect-ratio:16/9;
     background:#000
+}
+.video-responsive .video-js .vjs-tech{
+    object-fit:contain
 }
 
 /* =========================
@@ -645,6 +649,7 @@ h1{
 
         <video
             id="archive-video"
+            class="video-js vjs-big-play-centered"
             controls
             playsinline
             webkit-playsinline
@@ -799,7 +804,17 @@ h1{
 
 </footer>
 
+<script src="https://vjs.zencdn.net/8.23.8/video.min.js"></script>
 <script>
+
+const archivePlayer = videojs("archive-video", {
+    fluid: true,
+    responsive: true,
+    playbackRates: [0.5, 0.75, 1, 1.25, 1.5, 2],
+    controlBar: {
+        pictureInPictureToggle: true
+    }
+});
 
 /* =========================================================
    1. DANH SÁCH PHIM
@@ -1523,34 +1538,23 @@ function loadEpisode(episodeIndex){
         episodeIndex;
 
 
-    const video =
-        document.getElementById("archive-video");
+    archivePlayer.pause();
 
+    archivePlayer.poster(episode.poster || movie.poster);
 
-    video.pause();
+    archivePlayer.src({
+        src: episode.url,
+        type: "video/mp4"
+    });
 
+    archivePlayer.load();
 
-    video.src =
-        episode.url;
-
-
-    video.poster =
-        episode.poster || movie.poster;
-
-
-    video.load();
-
-
-    video.play().catch(
-        function(error){
-
-            console.log(
-                "Autoplay bị trình duyệt chặn:",
-                error
-            );
-
-        }
-    );
+    const playPromise = archivePlayer.play();
+    if(playPromise && typeof playPromise.catch === "function"){
+        playPromise.catch(function(error){
+            console.log("Autoplay bị trình duyệt chặn:", error);
+        });
+    }
 
 
     updateEpisodeButtons();
@@ -1617,9 +1621,6 @@ function updateEpisodeButtons(){
 
 function goBack(){
 
-    const video =
-        document.getElementById("archive-video");
-
     const videoList =
         document.getElementById("video-list");
 
@@ -1636,13 +1637,9 @@ function goBack(){
     closeStakeInterstitial();
 
 
-    video.pause();
-
-    video.removeAttribute("src");
-
-    video.removeAttribute("poster");
-
-    video.load();
+    archivePlayer.pause();
+    archivePlayer.reset();
+    archivePlayer.poster("");
 
 
     episodeSelector.style.display = "none";

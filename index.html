@@ -6,7 +6,7 @@
 <title>AICLIP.UK - AI Adult Videos</title>
 <link href="https://vjs.zencdn.net/8.23.8/video-js.css" rel="stylesheet">
 
-<!-- Adsterra Scripts (Đã thêm đủ mã 1 và 3) -->
+<!-- Adsterra Scripts -->
 <script src="https://pl32277893.profitableratecpmnetwork.com/8a/ad/20/8aad208609b138802e0cb0d7f3925266.js"></script>
 <script src="https://pl32277895.profitableratecpmnetwork.com/73/a8/ea/73a8eabc1811a7486714bfcad62ad5ee.js"></script>
 
@@ -372,7 +372,7 @@ h1{
 
 
 <!-- =========================
-     ADSTERRA BANNER 1 (Mã số 5: 468x60)
+     ADSTERRA BANNER 1 (Banner 468x60 ở đầu trang)
 ========================= -->
 
 <div class="adsterra-banner-container" aria-label="Advertisement">
@@ -387,21 +387,6 @@ h1{
     </script>
     <script src="https://brijmohan.org/22/78e4e575a462d9269b8d0045e257d3f9"></script>
 </div>
-
-
-<!-- =========================
-     ADSTERRA BANNER 2 (Mã số 2: Container invoke.js)
-========================= -->
-<div class="adsterra-banner-container">
-    <script async="async" data-cfasync="false" src="https://pl32277894.profitableratecpmnetwork.com/7f9e40e4e85f876002cd799c384bd020/invoke.js"></script>
-    <div id="container-7f9e40e4e85f876002cd799c384bd020"></div>
-</div>
-
-
-<!-- =========================
-     DIRECT LINK (Mã số 4: Bạn có thể dùng link này gắn vào đâu tùy thích, ví dụ nút bấm)
-     Link gốc: https://www.profitableratecpmnetwork.com/t46s87zj?key=0766709f4a1df88aa4d1b117a33f5d99
-========================= -->
 
 
 <!-- =========================
@@ -453,6 +438,15 @@ h1{
         class="episode-selector"
     ></div>
 
+</div>
+
+
+<!-- =========================
+     ADSTERRA BANNER 2 (Đã chuyển xuống cuối trang theo yêu cầu)[cite: 1]
+========================= -->
+<div class="adsterra-banner-container" style="margin-top: 30px;">
+    <script async="async" data-cfasync="false" src="https://pl32277894.profitableratecpmnetwork.com/7f9e40e4e85f876002cd799c384bd020/invoke.js"></script>
+    <div id="container-7f9e40e4e85f876002cd799c384bd020"></div>
 </div>
 
 
@@ -739,275 +733,4 @@ const MOVIES = [
         episodes: [
             {
                 title: "Episode 1",
-                url: "https://archive.org/download/1006_20261006_20261006/1005.mp4",
-                poster: "1005.jpg"
-            }
-        ]
-    },
-    {
-        title: "Promiscuous Fiancee",
-        poster: "1003.jpg",
-        subtitle: "Full HD",
-        episodes: [
-            {
-                title: "Episode 1",
-                url: "https://archive.org/download/1003-1_202610/1003%281%29.mp4",
-                poster: "1003.jpg"
-            }
-        ]
-    },
-    {
-        title: "Stranded on a Desert Island with 4 Sexy Girls",
-        poster: "1004.jpg",
-        subtitle: "Full HD",
-        episodes: [
-            {
-                title: "Episode 1",
-                url: "https://archive.org/download/1006_20261006_20261006/1004.mp4",
-                poster: "1004.jpg"
-            },
-            {
-                title: "Episode 2",
-                url: "https://archive.org/download/1004-ep-2/1004-ep2.mp4",
-                poster: "1004.jpg"
-            },
-            {
-                title: "Episode 3",
-                url: "https://archive.org/download/1004-ep-3/1004-ep3.mp4",
-                poster: "1004.jpg"
-            }
-        ]
-    },
-    {
-        title: "TEST",
-        poster: "1002.jpg",
-        subtitle: "Full HD",
-        episodes: [
-            {
-                title: "Episode 1",
-                url: "https://archive.org/download/1003-1_202610/1003%281%29.mp4",
-                poster: "1002.jpg"
-            }
-        ]
-    }
-];
-
-/* =========================================================
-   2. RENDER MOVIE CARDS
-========================================================= */
-
-const MOVIES_PER_PAGE = 10;
-let currentPage = 1;
-
-function renderMovies(){
-    const videoList = document.getElementById("video-list");
-    videoList.innerHTML = "";
-
-    const totalPages = Math.max(1, Math.ceil(MOVIES.length / MOVIES_PER_PAGE));
-    if(currentPage > totalPages){
-        currentPage = totalPages;
-    }
-
-    const startIndex = (currentPage - 1) * MOVIES_PER_PAGE;
-    const endIndex = Math.min(startIndex + MOVIES_PER_PAGE, MOVIES.length);
-
-    for(let index = startIndex; index < endIndex; index++){
-        const movie = MOVIES[index];
-        const card = document.createElement("div");
-        card.className = "card";
-
-        card.addEventListener("click", function(){
-            openMovie(index);
-        });
-
-        const thumbnailWrap = document.createElement("div");
-        thumbnailWrap.className = "thumbnail-wrap";
-
-        const thumbnailBg = document.createElement("img");
-        thumbnailBg.className = "thumbnail-bg";
-        thumbnailBg.src = movie.poster;
-        thumbnailBg.alt = "";
-
-        const image = document.createElement("img");
-        image.className = "thumbnail-main";
-        image.src = movie.poster;
-        image.alt = movie.title;
-
-        thumbnailWrap.appendChild(thumbnailBg);
-        thumbnailWrap.appendChild(image);
-
-        const content = document.createElement("div");
-        content.className = "card-content";
-
-        const title = document.createElement("div");
-        title.className = "card-title";
-        title.textContent = movie.title;
-
-        const subtitle = document.createElement("div");
-        subtitle.className = "card-sub";
-        subtitle.textContent = movie.subtitle || "Full HD";
-
-        content.appendChild(title);
-        content.appendChild(subtitle);
-
-        card.appendChild(thumbnailWrap);
-        card.appendChild(content);
-
-        videoList.appendChild(card);
-    }
-
-    renderPagination(totalPages);
-}
-
-function renderPagination(totalPages){
-    const pagination = document.getElementById("pagination");
-    pagination.innerHTML = "";
-
-    for(let page = 1; page <= totalPages; page++){
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "page-btn";
-        button.textContent = page;
-        button.setAttribute("aria-label", "Go to page " + page);
-
-        if(page === currentPage){
-            button.classList.add("active");
-            button.setAttribute("aria-current", "page");
-        }
-
-        button.addEventListener("click", function(){
-            if(page === currentPage){
-                return;
-            }
-            currentPage = page;
-            renderMovies();
-            window.scrollTo(0,0);
-        });
-
-        pagination.appendChild(button);
-    }
-}
-
-/* =========================================================
-   3. PLAYER STATE & LOGIC
-========================================================= */
-
-let currentMovieIndex = -1;
-let currentEpisodeIndex = 0;
-
-function openMovie(movieIndex){
-    const movie = MOVIES[movieIndex];
-    if(!movie || !movie.episodes || !movie.episodes.length){
-        return;
-    }
-
-    currentMovieIndex = movieIndex;
-    currentEpisodeIndex = 0;
-
-    const videoList = document.getElementById("video-list");
-    const playerSection = document.getElementById("player-section");
-    const pageTitle = document.getElementById("page-title");
-    const episodeSelector = document.getElementById("episode-selector");
-
-    videoList.style.display = "none";
-    document.getElementById("pagination").style.display = "none";
-    playerSection.style.display = "block";
-
-    pageTitle.innerText = movie.title;
-    renderEpisodes(movie);
-    episodeSelector.style.display = "flex";
-    loadEpisode(0);
-    window.scrollTo(0,0);
-}
-
-function renderEpisodes(movie){
-    const selector = document.getElementById("episode-selector");
-    selector.innerHTML = "";
-
-    movie.episodes.forEach(function(episode, index){
-        const button = document.createElement("button");
-        button.className = "episode-btn";
-        button.textContent = episode.title || ("Episode " + (index + 1));
-
-        button.addEventListener("click", function(){
-            switchEpisode(index);
-        });
-
-        selector.appendChild(button);
-    });
-
-    updateEpisodeButtons();
-}
-
-function loadEpisode(episodeIndex){
-    const movie = MOVIES[currentMovieIndex];
-    if(!movie) return;
-
-    const episode = movie.episodes[episodeIndex];
-    if(!episode) return;
-
-    currentEpisodeIndex = episodeIndex;
-
-    archivePlayer.pause();
-    archivePlayer.poster(episode.poster || movie.poster);
-    archivePlayer.src({
-        src: episode.url,
-        type: "video/mp4"
-    });
-    archivePlayer.load();
-
-    const playPromise = archivePlayer.play();
-    if(playPromise && typeof playPromise.catch === "function"){
-        playPromise.catch(function(error){
-            console.log("Autoplay bị trình duyệt chặn:", error);
-        });
-    }
-
-    updateEpisodeButtons();
-}
-
-function switchEpisode(episodeIndex){
-    const movie = MOVIES[currentMovieIndex];
-    if(!movie) return;
-    if(episodeIndex < 0 || episodeIndex >= movie.episodes.length) return;
-    loadEpisode(episodeIndex);
-}
-
-function updateEpisodeButtons(){
-    const buttons = document.querySelectorAll("#episode-selector .episode-btn");
-    buttons.forEach(function(button, index){
-        button.classList.toggle("active", index === currentEpisodeIndex);
-    });
-}
-
-function goBack(){
-    const videoList = document.getElementById("video-list");
-    const playerSection = document.getElementById("player-section");
-    const pageTitle = document.getElementById("page-title");
-    const episodeSelector = document.getElementById("episode-selector");
-
-    archivePlayer.pause();
-    archivePlayer.reset();
-    archivePlayer.poster("");
-
-    episodeSelector.style.display = "none";
-    episodeSelector.innerHTML = "";
-    playerSection.style.display = "none";
-    videoList.style.display = "grid";
-    document.getElementById("pagination").style.display = "flex";
-
-    pageTitle.innerText = "AICLIP.UK - AI Adult Videos";
-    currentMovieIndex = -1;
-    currentEpisodeIndex = 0;
-    window.scrollTo(0,0);
-}
-
-/* =========================================================
-   4. KHỞI TẠO TRANG
-========================================================= */
-renderMovies();
-
-</script>
-
-</body>
-</html>
+                url: "
